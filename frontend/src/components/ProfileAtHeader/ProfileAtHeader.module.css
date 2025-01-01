@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    color: white;
+    align-items: center;
+}
+
+.title {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.icon {
+    height: 25px;
+    width: 25px;
+}

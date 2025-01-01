@@ -1,0 +1,19 @@
+.bar {
+    border-radius: 20px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    width: 300px;
+    padding: 10px 10px;
+}
+
+.form {
+    position: relative;
+}
+
+.searchIcon {
+    position: absolute;
+    right: 20px;
+    height: 25px;
+    width: 25px;
+    top: 10px;
+}

@@ -1,0 +1,34 @@
+.leftsidebardiv {
+    height: 100vh;
+    flex: 1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    background-color: rgb(50, 50, 50);
+}
+
+.linkcontainer {
+    margin: 20px 0px;
+    width: 100%;
+    padding-left: 30px;
+    font-size: 17px;
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.2s ease;
+}
+
+.linkcontainer:hover {
+    transform: scale(1.05);
+}
+.sitename {
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 70px;
+}
+
+.icon {
+    height: 100%;
+    margin-right: 10px;
+}
