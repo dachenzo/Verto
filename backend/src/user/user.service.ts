@@ -1,72 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { v4 as uuidv4 } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
-    getUserById(id: number) {
-        const users = {
-            1: {
-                displayname: 'john_doe',
-                email: 'john.doe@example.com',
-                password: 'SecurePass123',
-            },
-            2: {
-                displayname: 'jane_smith',
-                email: 'jane.smith@example.com',
-                password: 'Passw0rd!',
-            },
-            3: {
-                displayname: 'dev_guru',
-                email: 'dev.guru@example.com',
-                password: 'Dev12345',
-            },
-            4: {
-                displayname: 'frontend_fanatic',
-                email: 'frontend@example.com',
-                password: 'ReactRocks!1',
-            },
-            5: {
-                displayname: 'backend_builder',
-                email: 'backend@example.com',
-                password: 'NestIsBest123',
-            },
-            6: {
-                displayname: 'taskmaster',
-                email: 'task.master@example.com',
-                password: 'TaskItUp2024',
-            },
-            7: {
-                displayname: 'bug_hunter',
-                email: 'bug.hunter@example.com',
-                password: 'FixItFast9',
-            },
-            8: {
-                displayname: 'admin_user',
-                email: 'admin@example.com',
-                password: 'Admin#123',
-            },
-            9: {
-                displayname: 'beta_tester',
-                email: 'beta.tester@example.com',
-                password: 'BetaTest567',
-            },
-            10: {
-                displayname: 'project_manager',
-                email: 'pm@example.com',
-                password: 'ManageThis!',
-            },
-        };
-        return users[id];
+    constructor(@InjectRepository(User) private repo: Repository<User>) {}
+
+    async getUserById(id: number) {
+        const user = await this.repo.findOneBy({ id });
+        // Error handling
+        return user;
     }
 
     createUser(displayname: string, email: string, password: string) {
-        const newUser = {
-            id: uuidv4(),
-            displayname,
-            email,
-            password,
-        };
+        const newUser = this.repo.create({ displayname, email, password });
+
         console.log('User Succesfully created');
-        return newUser;
+
+        return this.repo.save(newUser);
+    }
+    //pg_ctl -D "C:\Program Files\PostgreSQL\17\" start
+    async updateUser(id: number, attrs: Partial<User>) {
+        const user = await this.getUserById(id);
+        //BUBBLE UP ERROR TO CONTROLLER
+        Object.assign(user, attrs);
+        return this.repo.save(user);
+    }
+
+    async deleteUser(id: number) {
+        const user = await this.getUserById(id);
+        //BUBBLE UP ERROR TO CONTROLLER
+        return this.repo.remove(user);
     }
 }
