@@ -7,6 +7,10 @@ import { User } from './user.entity';
 export class UserService {
     constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
+    getAllUsers() {
+        return this.repo.find();
+    }
+
     async getUserById(id: number) {
         const user = await this.repo.findOneBy({ id });
         // Error handling

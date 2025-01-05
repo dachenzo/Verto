@@ -3,6 +3,29 @@ content-type: application/json
 
 {
     "displayname": "pichael",
-    "email": "michaeokeke101@gmail.com",
+    "email": "gg@g.com",
     "password": "ghghghkk"
+}
+
+
+### get user by id
+GET http://localhost:3000/user/1
+
+
+### get all users
+GET http://localhost:3000/user
+
+
+### Delete User by id
+DELETE http://localhost:3000/user/1
+
+
+### Update user by id
+PATCH  http://localhost:3000/user/5
+content-type: application/json
+
+{
+    "displayname": "pichael",
+    "email": "michael@gmail.ppcom"
+    
 }
