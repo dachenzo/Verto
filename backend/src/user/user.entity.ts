@@ -3,10 +3,10 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    userId: number;
 
     @Column()
-    displayname: string;
+    username: string;
 
     @Column({ unique: true })
     email: string;

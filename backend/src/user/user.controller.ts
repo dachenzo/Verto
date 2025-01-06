@@ -19,8 +19,8 @@ export class UserController {
     constructor(private userService: UserService) {}
 
     @Get('/:id')
-    getUser(@Param('id') id: string) {
-        return this.userService.getUserById(parseInt(id));
+    getUser(@Param('id') userId: string) {
+        return this.userService.getUserById(parseInt(userId));
     }
 
     // Tempoary for testing
@@ -32,20 +32,16 @@ export class UserController {
 
     @Post()
     createUser(@Body() body: CreateUserDto) {
-        this.userService.createUser(
-            body.displayname,
-            body.email,
-            body.password,
-        );
+        this.userService.createUser(body.username, body.email, body.password);
     }
 
     @Patch('/:id')
-    updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
-        return this.userService.updateUser(parseInt(id), body);
+    updateUser(@Param('id') userId: string, @Body() body: UpdateUserDto) {
+        return this.userService.updateUser(parseInt(userId), body);
     }
 
     @Delete('/:id')
-    deleteUser(@Param('id') id: string) {
-        this.userService.deleteUser(parseInt(id));
+    deleteUser(@Param('id') userId: string) {
+        this.userService.deleteUser(parseInt(userId));
     }
 }

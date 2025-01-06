@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -11,29 +12,37 @@ export class UserService {
         return this.repo.find();
     }
 
-    async getUserById(id: number) {
-        const user = await this.repo.findOneBy({ id });
-        // Error handling
-        return user;
+    getUserById(userId: number) {
+        return this.repo.findOneBy({ userId });
     }
 
-    createUser(displayname: string, email: string, password: string) {
-        const newUser = this.repo.create({ displayname, email, password });
+    getUserByEmail(email: string) {
+        return this.repo.findOneBy({ email });
+    }
+
+    async createUser(username: string, email: string, password: string) {
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const newUser = this.repo.create({
+            username,
+            email,
+            password: hashedPassword,
+        });
 
         console.log('User Succesfully created');
 
-        return this.repo.save(newUser);
+        return await this.repo.save(newUser);
     }
     //pg_ctl -D "C:\Program Files\PostgreSQL\17\" start
-    async updateUser(id: number, attrs: Partial<User>) {
-        const user = await this.getUserById(id);
+    async updateUser(userId: number, attrs: Partial<User>) {
+        const user = await this.getUserById(userId);
         //BUBBLE UP ERROR TO CONTROLLER
         Object.assign(user, attrs);
         return this.repo.save(user);
     }
 
-    async deleteUser(id: number) {
-        const user = await this.getUserById(id);
+    async deleteUser(userId: number) {
+        const user = await this.getUserById(userId);
         //BUBBLE UP ERROR TO CONTROLLER
         return this.repo.remove(user);
     }

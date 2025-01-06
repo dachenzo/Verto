@@ -7,7 +7,7 @@ export class UpdateUserDto {
 
     @IsString()
     @IsOptional()
-    displayname: string;
+    username: string;
 
     @IsString()
     @IsOptional()
