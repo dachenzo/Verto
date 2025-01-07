@@ -4,6 +4,12 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { RedisModule } from './redis/redis.module';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthCoreModule } from './auth-core/auth-core.module';
 
 @Module({
     imports: [
@@ -21,8 +27,16 @@ import { AuthModule } from './auth/auth.module';
         UserModule,
         TasksModule,
         AuthModule,
+        RedisModule,
+
+        AuthCoreModule,
     ],
     controllers: [],
-    providers: [],
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard,
+        },
+    ],
 })
 export class AppModule {}
