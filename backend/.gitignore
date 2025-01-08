@@ -3,6 +3,9 @@
 /node_modules
 /build
 
+#request clients
+*.http
+
 # Logs
 logs
 *.log
