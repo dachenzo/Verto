@@ -23,7 +23,7 @@ export class AuthController {
             body.password,
         );
 
-        return this.authService.login(user.email, user.password);
+        return this.authService.login(user.userId, user.email);
     }
 
     @Post('/logout')

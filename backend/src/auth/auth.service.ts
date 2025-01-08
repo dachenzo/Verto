@@ -28,8 +28,8 @@ export class AuthService {
         return result;
     }
     //TODO: remove any from login parametyer tpye
-    async login(email: string, password: string) {
-        const payload = { email: email, sub: password };
+    async login(userId: number, email: string) {
+        const payload = { sub: userId, email: email };
         return {
             access_token: this.jwtservice.sign(payload),
         };
@@ -42,6 +42,6 @@ export class AuthService {
             passwords,
         );
 
-        return this.login(user.email, user.password);
+        return this.login(user.userId, user.email);
     }
 }

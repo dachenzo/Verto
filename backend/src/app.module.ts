@@ -8,6 +8,8 @@ import { RedisModule } from './redis/redis.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthCoreModule } from './auth-core/auth-core.module';
+import { User } from './user/user.entity';
+import { Task } from './tasks/task.entity';
 
 @Module({
     imports: [
@@ -21,6 +23,7 @@ import { AuthCoreModule } from './auth-core/auth-core.module';
             database: process.env.DB_NAME,
             autoLoadEntities: true,
             synchronize: true,
+            entities: [User, Task],
         }),
         UserModule,
         TasksModule,

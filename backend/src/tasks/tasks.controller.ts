@@ -1,7 +1,21 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    Param,
+    Patch,
+    Post,
+    UseInterceptors,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dtos/create-task-dto';
+import {
+    UpdateCalendarTaskDto,
+    UpdateDeadlineTaskDto,
+} from './dtos/update-task-dto';
+import { InsertUserInterceptor } from 'src/interceptors/insert-userid.interceptor';
 
+@UseInterceptors(InsertUserInterceptor)
 @Controller('/tasks')
 export class TasksController {
     constructor(private taskService: TasksService) {}
@@ -16,8 +30,14 @@ export class TasksController {
     }
 
     @Post()
-    createTask(@Body() body: CreateTaskDto) {
-        const task = this.taskService.createTask(body.title, body.description);
-        return task;
+    createDeadlineTask(@Body() body: CreateTaskDto) {
+        console.log(body);
+        return this.taskService.createTask(body);
+    }
+
+    @Patch('/:id')
+    updateTask(@Body() body: UpdateDeadlineTaskDto | UpdateCalendarTaskDto) {
+        console.log(body);
+        return this.taskService.updateTask(body);
     }
 }
