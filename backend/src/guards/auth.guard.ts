@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { JwtRedisService } from 'src/redis/jwt-redis.service';
-import { jwtConstants } from 'src/auth/constants'; //TODO: nedds to go
+
 import { NO_GUARD } from 'src/auth/decorators/public.decorator';
 
 @Injectable()
@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate {
 
         try {
             const payload = this.jwtService.verify(token, {
-                secret: jwtConstants.secret,
+                secret: process.env.JWT_SECRET_KEY,
             });
 
             const isBlacklisted =

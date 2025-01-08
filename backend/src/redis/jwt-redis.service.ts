@@ -6,8 +6,8 @@ export class JwtRedisService implements OnModuleInit, OnModuleDestroy {
     private client: Redis;
     onModuleInit() {
         this.client = new Redis({
-            host: 'localhost',
-            port: 6379,
+            host: process.env.REDIS_HOST,
+            port: parseInt(process.env.REDIS_PORT),
         });
 
         this.client.on('connect', () => {

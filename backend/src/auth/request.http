@@ -15,20 +15,20 @@ POST http://localhost:3000/auth/register
 content-type: application/json
 
 {
-    "username": "Picollo",
-    "email": "ga@g.com",
-    "password": "ghghghkk"
+    "username": "david",
+    "email": "david@gmail.com",
+    "password": "david@2006"
 }
 
 ### Tsts
 GET http://localhost:3000/auth/test
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnQGcuY29tIiwic3ViIjoiJDJiJDEwJEJTOGhBdjhodDJ0UmhJd0t1c09RTWVkVE54WHVPLnczajRqUjRjTHBuUWpuOUVMU0p0WDU2IiwiaWF0IjoxNzM2Mjc2Mzc2LCJleHAiOjE3MzYyNzk5NzZ9.eAUMxFaEvQFCwx-UH69nOOaaeQmIGC9jrReTMD1A7ZU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnQGcuY29tIiwic3ViIjoiJDJiJDEwJEJTOGhBdjhodDJ0UmhJd0t1c09RTWVkVE54WHVPLnczajRqUjRjTHBuUWpuOUVMU0p0WDU2IiwiaWF0IjoxNzM2MzMzNjgxLCJleHAiOjE3MzYzMzcyODF9.WPcyymVFBS9JU_bt0PmVsx7Ags6onc4sJBIWHMBk1vs
 
 
 
 
 ###Log out
 POST http://localhost:3000/auth/logout
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnQGcuY29tIiwic3ViIjoiJDJiJDEwJEJTOGhBdjhodDJ0UmhJd0t1c09RTWVkVE54WHVPLnczajRqUjRjTHBuUWpuOUVMU0p0WDU2IiwiaWF0IjoxNzM2Mjc2Mzc2LCJleHAiOjE3MzYyNzk5NzZ9.eAUMxFaEvQFCwx-UH69nOOaaeQmIGC9jrReTMD1A7ZU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnQGcuY29tIiwic3ViIjoiJDJiJDEwJEJTOGhBdjhodDJ0UmhJd0t1c09RTWVkVE54WHVPLnczajRqUjRjTHBuUWpuOUVMU0p0WDU2IiwiaWF0IjoxNzM2MzMzNjgxLCJleHAiOjE3MzYzMzcyODF9.WPcyymVFBS9JU_bt0PmVsx7Ags6onc4sJBIWHMBk1vs
 
 

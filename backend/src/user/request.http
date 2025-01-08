@@ -14,6 +14,8 @@ GET http://localhost:3000/user/1
 
 ### get all users
 GET http://localhost:3000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnQGcuY29tIiwic3ViIjoiJDJiJDEwJEJTOGhBdjhodDJ0UmhJd0t1c09RTWVkVE54WHVPLnczajRqUjRjTHBuUWpuOUVMU0p0WDU2IiwiaWF0IjoxNzM2MzMxNjE4LCJleHAiOjE3MzYzMzUyMTh9.t0BQPOPmxklFGRSuLSNqi0Ekp8tGtAQQO-LLnjiv_rg
+
 
 
 ### Delete User by id
