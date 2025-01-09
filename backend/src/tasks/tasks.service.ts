@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { Task } from './task.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -39,16 +43,23 @@ export class TasksService {
         }
     }
 
-    async updateTask(task: Partial<Task>) {
+    async updateTask(task: Partial<Task>, taskId: number) {
         //TODO:  partial might not have id
-        const currentTask = await this.getTaskById(task.taskId);
-        Object.assign(currentTask, task);
+        const currentTask = await this.getTaskById(taskId);
+        if (task.type !== currentTask.type) {
+            throw new BadRequestException(
+                `Task type cannot be updated, current type is ${currentTask.type}`,
+            );
+        }
+        const { type, ...newTask } = task;
+        Object.assign(currentTask, newTask);
 
         return await this.repo.save(currentTask);
     }
 
     async getAlltasks() {
         const tasks = await this.repo.find();
+        return tasks;
     }
 
     async getTaskById(taskId: number) {

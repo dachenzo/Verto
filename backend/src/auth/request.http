@@ -22,7 +22,7 @@ content-type: application/json
 
 ### Tsts
 GET http://localhost:3000/auth/test
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGF2aWRAZ21haWwuY29tIiwiaWF0IjoxNzM2MzYwNTg2LCJleHAiOjE3MzYzNjQxODZ9.Sb8-8JZepLQq8kBu1cuBzLl6udr93jv6kThzdz3_0hc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGF2aWRAZ21haWwuY29tIiwiaWF0IjoxNzM2NDI2MjY5LCJleHAiOjE3MzY0Mjk4Njl9.kd4VgwMb7aZdisFmvh5lvBu_wPeihljBDJzGUJAw_P8
 
 
 

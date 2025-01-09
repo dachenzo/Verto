@@ -44,6 +44,6 @@ export class CreateTaskDto {
     @IsDate()
     endTime?: Date;
 
-    @IsOptional()
+    @IsNotEmpty()
     userId: number;
 }
