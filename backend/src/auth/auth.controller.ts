@@ -23,7 +23,11 @@ export class AuthController {
             body.password,
         );
 
-        const result = await this.authService.login(user.userId, user.email);
+        const result = await this.authService.login(
+            user.userId,
+            user.email,
+            user,
+        );
         return result;
     }
 
@@ -46,6 +50,12 @@ export class AuthController {
             body.email,
             body.password,
         );
+    }
+
+    @Public()
+    @Post('/refresh')
+    async refreshToken(@Body('refreshToken') refreshToken: string) {
+        return this.authService.refreshToken(refreshToken);
     }
 
     @Get('/test')

@@ -55,4 +55,8 @@ export class UserService {
         //BUBBLE UP ERROR TO CONTROLLER
         return this.repo.remove(user);
     }
+
+    async saveUser(user: User) {
+        return await this.repo.save(user);
+    }
 }
