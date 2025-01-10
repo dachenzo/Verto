@@ -52,6 +52,23 @@ export class TasksService {
                 `Task type cannot be updated, current type is ${currentTask.type}`,
             );
         }
+
+        if (task.endTime) {
+            if (task.endTime < currentTask.startTime) {
+                throw new BadRequestException(
+                    `Start time cannot be greater than end time`,
+                );
+            }
+        }
+
+        if (task.startTime) {
+            if (task.startTime > currentTask.endTime) {
+                throw new BadRequestException(
+                    `Start time cannot be greater than end time`,
+                );
+            }
+        }
+
         const { type, ...newTask } = task;
         Object.assign(currentTask, newTask);
 

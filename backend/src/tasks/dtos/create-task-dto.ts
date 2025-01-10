@@ -7,6 +7,8 @@ import {
     IsString,
     ValidateIf,
 } from 'class-validator';
+import { IsFutureDate } from 'src/validators/is-future-date.validator';
+import { IsValidEndTime } from '../decorators/is-valid-endtime';
 
 export enum TaskType {
     DEADLINE = 'DEADLINE',
@@ -30,18 +32,22 @@ export class CreateTaskDto {
     @IsNotEmpty()
     @Type(() => Date)
     @IsDate()
+    @IsFutureDate({ message: 'Deadline has to be a future date' })
     deadline?: Date;
 
     @ValidateIf((o) => o.type === 'CALENDAR')
     @IsNotEmpty()
     @Type(() => Date)
     @IsDate()
+    @IsFutureDate({ message: 'Start time has to be a future date' })
     startTime?: Date;
 
     @ValidateIf((o) => o.type === 'CALENDAR')
     @IsNotEmpty()
     @Type(() => Date)
     @IsDate()
+    @IsFutureDate({ message: 'End time has to be a future date' })
+    @IsValidEndTime()
     endTime?: Date;
 
     @IsNotEmpty()

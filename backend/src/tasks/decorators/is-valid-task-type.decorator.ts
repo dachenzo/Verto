@@ -29,13 +29,14 @@ export function IsValidTaskType(validationOptions?: ValidationOptions) {
                             return true;
                         }
                         return (
-                            !!task.startTime && !!task.endTime && !task.deadline
+                            (!!task.startTime || !!task.endTime) &&
+                            !task.deadline
                         );
                     }
                     return false;
                 },
                 defaultMessage() {
-                    return 'Invalid fields for Update of specific task /type';
+                    return 'Invalid fields for Update of specific task type';
                 },
             },
         });
