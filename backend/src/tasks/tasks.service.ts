@@ -43,9 +43,10 @@ export class TasksService {
         }
     }
 
-    async updateTask(task: Partial<Task>, taskId: number) {
+    //TODO: need to remove the implicit any here
+    async updateTask(task, taskId: number) {
         //TODO:  partial might not have id
-        const currentTask = await this.getTaskById(taskId);
+        const currentTask = await this.getTaskById(taskId, task.userId);
         if (task.type !== currentTask.type) {
             throw new BadRequestException(
                 `Task type cannot be updated, current type is ${currentTask.type}`,
@@ -57,21 +58,27 @@ export class TasksService {
         return await this.repo.save(currentTask);
     }
 
-    async getAlltasks() {
-        const tasks = await this.repo.find();
+    async getAlltasks(userData: { userId: number }) {
+        const tasks = await this.repo.find({
+            where: {
+                user: { userId: userData.userId },
+            },
+        });
         return tasks;
     }
 
-    async getTaskById(taskId: number) {
-        const task = await this.repo.findOneBy({ taskId });
+    async getTaskById(taskId: number, userId: number) {
+        const task = await this.repo.findOne({
+            where: { taskId: taskId, user: { userId: userId } },
+        });
         if (!task) {
             throw new NotFoundException('Task not defined');
         }
         return task;
     }
 
-    async deleteTask(taskId: number) {
-        const task = await this.getTaskById(taskId);
+    async deleteTask(taskId: number, userId: number) {
+        const task = await this.getTaskById(taskId, userId);
 
         return await this.repo.remove(task);
     }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
@@ -12,12 +12,23 @@ export class UserService {
         return this.repo.find();
     }
 
-    getUserById(userId: number) {
-        return this.repo.findOneBy({ userId });
+    async getUserById(userId: number) {
+        const user = await this.repo.findOneBy({ userId });
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+        return user;
     }
 
-    getUserByEmail(email: string) {
-        return this.repo.findOneBy({ email });
+    async getUserByEmail(email: string) {
+        const user = await this.repo.findOneBy({ email });
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        return user;
     }
 
     async createUser(username: string, email: string, password: string) {
@@ -29,11 +40,9 @@ export class UserService {
             password: hashedPassword,
         });
 
-        console.log('User Succesfully created');
-
         return await this.repo.save(newUser);
     }
-    //pg_ctl -D "C:\Program Files\PostgreSQL\17\" start
+
     async updateUser(userId: number, attrs: Partial<User>) {
         const user = await this.getUserById(userId);
         //BUBBLE UP ERROR TO CONTROLLER

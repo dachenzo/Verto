@@ -23,7 +23,8 @@ export class AuthController {
             body.password,
         );
 
-        return this.authService.login(user.userId, user.email);
+        const result = await this.authService.login(user.userId, user.email);
+        return result;
     }
 
     @Post('/logout')

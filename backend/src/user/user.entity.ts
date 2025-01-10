@@ -1,5 +1,11 @@
 import { Task } from 'src/tasks/task.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    OneToMany,
+    Index,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -10,6 +16,7 @@ export class User {
     username: string;
 
     @Column({ unique: true })
+    @Index()
     email: string;
 
     @Column()

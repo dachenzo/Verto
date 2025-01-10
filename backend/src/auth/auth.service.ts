@@ -17,29 +17,26 @@ export class AuthService {
     async validateUser(email: string, password: string) {
         const user = await this.userService.getUserByEmail(email);
 
-        if (!user) {
-            throw new NotFoundException('User not found');
-        }
-
         if (!(await bcrypt.compare(password, user.password))) {
             throw new UnauthorizedException('Invalid Credentials');
         }
-        const { username, ...result } = user;
-        return result;
+
+        return user;
     }
     //TODO: remove any from login parametyer tpye
     async login(userId: number, email: string) {
         const payload = { sub: userId, email: email };
+        const access_token = this.jwtservice.sign(payload);
         return {
-            access_token: this.jwtservice.sign(payload),
+            access_token,
         };
     }
 
-    async register(username: string, email: string, passwords: string) {
+    async register(username: string, email: string, password: string) {
         const user = await this.userService.createUser(
             username,
             email,
-            passwords,
+            password,
         );
 
         return this.login(user.userId, user.email);
