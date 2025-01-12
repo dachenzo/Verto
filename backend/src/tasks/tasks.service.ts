@@ -27,6 +27,7 @@ export class TasksService {
                 type: task.type,
                 startTime: task.startTime,
                 endTime: task.endTime,
+                priority: task.priority,
                 user: user,
             });
             return await this.repo.save(newTask);
@@ -36,6 +37,7 @@ export class TasksService {
                 description: task.description,
                 type: task.type,
                 deadline: task.deadline,
+                priority: task.priority,
                 user: user,
             });
 
@@ -56,7 +58,7 @@ export class TasksService {
         if (task.endTime) {
             if (task.endTime < currentTask.startTime) {
                 throw new BadRequestException(
-                    `Start time cannot be greater than end time`,
+                    `End time cannot be earleir than start time`,
                 );
             }
         }
@@ -64,7 +66,7 @@ export class TasksService {
         if (task.startTime) {
             if (task.startTime > currentTask.endTime) {
                 throw new BadRequestException(
-                    `Start time cannot be greater than end time`,
+                    `Start time cannot be later than end time`,
                 );
             }
         }

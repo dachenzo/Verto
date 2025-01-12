@@ -7,7 +7,7 @@ import {
     ValidateIf,
 } from 'class-validator';
 
-import { TaskType } from './create-task-dto';
+import { Priorities, TaskType } from './create-task-dto';
 import { Type } from 'class-transformer';
 import { IsValidTaskType } from '../decorators/is-valid-task-type.decorator';
 import { IsFutureDate } from 'src/validators/is-future-date.validator';
@@ -25,6 +25,9 @@ export class UpdateTaskDto {
     @IsNotEmpty()
     @IsValidTaskType()
     type: TaskType;
+
+    @IsOptional()
+    priority: Priorities;
 
     @ValidateIf((o) => o.type === 'DEADLINE')
     @IsOptional()

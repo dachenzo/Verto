@@ -1,4 +1,5 @@
 import { Expose } from 'class-transformer';
+import { Priorities } from './create-task-dto';
 
 export class TaskSerializerDto {
     @Expose()
@@ -15,6 +16,9 @@ export class TaskSerializerDto {
 
     @Expose()
     deadline: Date;
+
+    @Expose()
+    priority: Priorities;
 
     @Expose()
     startTime: Date;

@@ -28,6 +28,7 @@ export class AuthController {
             user.email,
             user,
         );
+
         return result;
     }
 

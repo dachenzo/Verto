@@ -15,6 +15,12 @@ export enum TaskType {
     CALENDAR = 'CALENDAR',
 }
 
+export enum Priorities {
+    MEDIUM = 'MEDIUM',
+    LOW = 'LOW',
+    HIGH = 'HIGH',
+}
+
 export class CreateTaskDto {
     @IsString()
     @IsNotEmpty()
@@ -27,6 +33,9 @@ export class CreateTaskDto {
     @IsEnum(TaskType)
     @IsNotEmpty()
     type: TaskType;
+
+    @IsOptional()
+    priority: Priorities;
 
     @ValidateIf((o) => o.type === 'DEADLINE')
     @IsNotEmpty()

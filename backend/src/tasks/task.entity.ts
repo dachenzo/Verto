@@ -16,6 +16,9 @@ export class Task {
     type: 'CALENDAR' | 'DEADLINE';
 
     @Column({ nullable: true })
+    priority: 'HIGH' | 'LOW' | 'MEDIUM';
+
+    @Column({ nullable: true })
     deadline: Date;
 
     @Column({ nullable: true })
