@@ -1,0 +1,55 @@
+.dayColumn {
+    border-right: 1px solid #eee;
+    min-height: 600px;
+}
+
+.dayColumn:last-child {
+    border-right: none;
+}
+
+.dayHeader {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.dayHeader.today {
+    background-color: #e8f0fe;
+}
+
+.weekday {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.date {
+    font-weight: 500;
+}
+
+.dayContent {
+    padding: 1rem;
+}
+
+.addTask {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #f0f2f5;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.addTask:hover {
+    background: #e8f0fe;
+    color: #1a73e8;
+}
+
+.today {
+    background-color: #e8f0fe;
+}

@@ -1,0 +1,39 @@
+.calendarNav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navButton {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navButton:hover {
+    background-color: #f0f2f5;
+}
+
+.todayButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.todayButton:hover {
+    background-color: #f0f2f5;
+}
+
+.currentMonth {
+    font-size: 1.25rem;
+    font-weight: 500;
+}

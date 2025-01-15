@@ -1,0 +1,7 @@
+.container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--task-card-shadow);
+    overflow: hidden;
+    margin-top: 40px;
+}
