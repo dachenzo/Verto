@@ -4,11 +4,16 @@
     margin-bottom: 30px;
     padding: 5px 15px;
     border: none;
+    box-sizing: border-box;
 }
 
 .formLabel {
     width: 100%;
     color: white;
+}
+
+.form {
+    width: 100%;
 }
 
 .btn {

@@ -1,0 +1,19 @@
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.filterGroup {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.select {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 8px;
+}

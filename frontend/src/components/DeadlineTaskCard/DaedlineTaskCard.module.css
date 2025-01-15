@@ -1,0 +1,12 @@
+.card {
+    box-shadow: var(--task-card-shadow);
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    grid-area: c;
+    padding: var(--task-card-padding);
+    overflow: scroll;
+}
+
+.card:last-child {
+    border-bottom: none;
+}

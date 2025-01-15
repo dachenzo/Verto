@@ -30,7 +30,12 @@ const SignUpForm = () => {
     return (
         <>
             <h1 className={styles.title}>Create Account</h1>
-            <form action="" onSubmit={handleSubmit(submit)} noValidate>
+            <form
+                className={styles.form}
+                action=""
+                onSubmit={handleSubmit(submit)}
+                noValidate
+            >
                 <label className={styles.formLabel} htmlFor="displayName">
                     Display Name
                 </label>

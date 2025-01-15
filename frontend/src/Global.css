@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+    --primary-color: white;
+    --secondary-color: black;
+    --highlight-color: rgb(0, 0, 0);
+    --task-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --task-card-padding: 20px;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}

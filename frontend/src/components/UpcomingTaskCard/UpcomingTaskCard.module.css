@@ -1,0 +1,7 @@
+.card {
+    border-radius: 20px;
+    box-shadow: var(--task-card-shadow);
+    background-color: var(--primary-color);
+    padding: var(--task-card-padding);
+    grid-area: b;
+}

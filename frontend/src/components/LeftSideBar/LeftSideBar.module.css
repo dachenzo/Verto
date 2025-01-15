@@ -1,31 +1,52 @@
 .leftsidebardiv {
-    height: 100vh;
-    flex: 1;
-    color: white;
+    width: 200px;
+    color: black;
     display: flex;
+    padding: 2rem;
     flex-direction: column;
     justify-content: flex-start;
-
-    background-color: rgb(50, 50, 50);
+    background-color: var(--primary-color);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .linkcontainer {
     margin: 20px 0px;
-    width: 100%;
-    padding-left: 30px;
+    color: #666;
+    padding: 0.8rem 1rem;
     font-size: 17px;
     display: flex;
+    border-radius: 8px;
     flex-direction: row;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .linkcontainer:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
+    background-color: #f0f2f5;
+    color: #1a73e8;
 }
+
+.active {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+}
+
+.navLinks {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: flex-start;
+}
+
+.settings {
+    margin-top: auto;
+}
+
 .sitename {
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-bottom: 70px;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    color: #1a73e8;
 }
 
 .icon {
