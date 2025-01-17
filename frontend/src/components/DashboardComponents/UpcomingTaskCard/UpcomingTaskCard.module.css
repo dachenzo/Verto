@@ -4,4 +4,6 @@
     background-color: var(--primary-color);
     padding: var(--task-card-padding);
     grid-area: b;
+    max-height: 100%;
+    overflow-y: auto;
 }

@@ -4,9 +4,10 @@ interface Props {
     dayName: string;
     dayDate: number;
     isToday: boolean;
+    children?: React.ReactNode;
 }
 
-const DayColumn = ({ dayName, dayDate, isToday }: Props) => {
+const DayColumn = ({ dayName, dayDate, isToday, children }: Props) => {
     return (
         <div className={styles.dayColumn}>
             <div
@@ -17,6 +18,7 @@ const DayColumn = ({ dayName, dayDate, isToday }: Props) => {
             </div>
             <div className={styles.dayContent}>
                 <button className={styles.addTask}>+</button>
+                {children}
             </div>
         </div>
     );

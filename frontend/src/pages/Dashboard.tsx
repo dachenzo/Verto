@@ -1,14 +1,14 @@
 import Canvas from "../components/Canvas/Canvas";
 
-import DashboardContainer from "../components/DashboardContainer/DashboardContainer";
-import DashboardTask from "../components/DashboardTask/DashboardTask";
-import DeadlineTaskCard from "../components/DeadlineTaskCard/DeadlineTaskCard";
+import DashboardContainer from "../components/DashboardComponents/DashboardContainer/DashboardContainer";
+import DashboardTask from "../components/DashboardComponents/DashboardTask/DashboardTask";
+import DeadlineTaskCard from "../components/DashboardComponents/DeadlineTaskCard/DeadlineTaskCard";
 import Header from "../components/Header/Header";
 import ProfileAtHeader from "../components/ProfileAtHeader/ProfileAtHeader";
 import SearchBar from "../components/SearchBar/SearchBar";
-import TaskCardHeader from "../components/TaskCardHeader/TaskCardHeader";
-import TodayTaskCard from "../components/TodayTaskCard/TodayTaskCard";
-import UpcomingTaskCard from "../components/UpcomingTaskCard/UpcomingTaskCard";
+import TaskCardHeader from "../components/DashboardComponents/TaskCardHeader/TaskCardHeader";
+import TodayTaskCard from "../components/DashboardComponents/TodayTaskCard/TodayTaskCard";
+import UpcomingTaskCard from "../components/DashboardComponents/UpcomingTaskCard/UpcomingTaskCard";
 
 const Dashboard = () => {
     return (
@@ -34,9 +34,6 @@ const Dashboard = () => {
                 </UpcomingTaskCard>
                 <DeadlineTaskCard>
                     <TaskCardHeader>Upcoming Deadlines</TaskCardHeader>
-                    <DashboardTask></DashboardTask>
-                    <DashboardTask></DashboardTask>
-                    <DashboardTask></DashboardTask>
                     <DashboardTask></DashboardTask>
                     <DashboardTask></DashboardTask>
                     <DashboardTask></DashboardTask>

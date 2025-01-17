@@ -2,9 +2,10 @@
     box-shadow: var(--task-card-shadow);
     border-radius: 20px;
     background-color: var(--primary-color);
-    grid-area: c;
     padding: var(--task-card-padding);
-    overflow: scroll;
+    grid-area: a;
+    max-height: 100%;
+    overflow-y: auto;
 }
 
 .card:last-child {

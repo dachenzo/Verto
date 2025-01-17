@@ -7,9 +7,12 @@
     justify-content: flex-start;
     background-color: var(--primary-color);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .linkcontainer {
+    cursor: pointer;
     margin: 20px 0px;
     color: #666;
     padding: 0.8rem 1rem;
@@ -47,6 +50,7 @@
     font-weight: bold;
     margin-bottom: 3rem;
     color: #1a73e8;
+    margin-left: 15px;
 }
 
 .icon {

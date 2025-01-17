@@ -9,6 +9,7 @@ import Canvas from "../components/Canvas/Canvas";
 import Header from "../components/Header/Header";
 import ProfileAtHeader from "../components/ProfileAtHeader/ProfileAtHeader";
 import SearchBar from "../components/SearchBar/SearchBar";
+import CalendarTask from "../components/CalendarComponents/CalendarTask/CalendarTask";
 
 const CalendarPage = () => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -56,37 +57,79 @@ const CalendarPage = () => {
                         dayDate={dayDates[0]}
                         dayName={days[0]}
                         isToday={getIsToday(numYear, numMonth, dayDates[0])}
-                    ></DayColumn>
+                    >
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="MED"></CalendarTask>
+                        <CalendarTask priority="MED"></CalendarTask>
+                    </DayColumn>
                     <DayColumn
                         dayDate={dayDates[1]}
                         dayName={days[1]}
                         isToday={getIsToday(numYear, numMonth, dayDates[1])}
-                    ></DayColumn>
+                    >
+                        <CalendarTask priority="MED"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="MED"></CalendarTask>
+                    </DayColumn>
                     <DayColumn
                         dayDate={dayDates[2]}
                         dayName={days[2]}
                         isToday={getIsToday(numYear, numMonth, dayDates[2])}
-                    ></DayColumn>
+                    >
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="MED"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                    </DayColumn>
                     <DayColumn
                         dayDate={dayDates[3]}
                         dayName={days[3]}
                         isToday={getIsToday(numYear, numMonth, dayDates[3])}
-                    ></DayColumn>
+                    >
+                        <CalendarTask priority="MED"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="MED"></CalendarTask>
+                    </DayColumn>
                     <DayColumn
                         dayDate={dayDates[4]}
                         dayName={days[4]}
                         isToday={getIsToday(numYear, numMonth, dayDates[4])}
-                    ></DayColumn>
+                    >
+                        <CalendarTask priority="MED"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="MED"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                    </DayColumn>
                     <DayColumn
                         dayDate={dayDates[5]}
                         dayName={days[5]}
                         isToday={getIsToday(numYear, numMonth, dayDates[5])}
-                    ></DayColumn>
+                    >
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                    </DayColumn>
                     <DayColumn
                         dayDate={dayDates[6]}
                         dayName={days[6]}
                         isToday={getIsToday(numYear, numMonth, dayDates[6])}
-                    ></DayColumn>
+                    >
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="LOW"></CalendarTask>
+                        <CalendarTask priority="MED"></CalendarTask>
+                        <CalendarTask priority="HIGH"></CalendarTask>
+                    </DayColumn>
                 </WeekGrid>
             </CalendarContainer>
         </Canvas>

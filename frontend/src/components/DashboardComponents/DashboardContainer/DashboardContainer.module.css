@@ -1,0 +1,23 @@
+.gridContainer {
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "a a"
+        "b c";
+    gap: 1.7rem;
+    flex-grow: 1;
+    box-sizing: border-box;
+    height: 800px;
+}
+
+@media (max-width: 655px) {
+    .gridContainer {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas:
+            "a"
+            "b"
+            "c";
+    }
+}

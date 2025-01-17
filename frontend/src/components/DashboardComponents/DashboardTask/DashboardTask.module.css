@@ -1,0 +1,69 @@
+.taskItem {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.taskItem:last-child {
+    border-bottom: none;
+}
+
+.taskContent {
+    flex-grow: 1;
+}
+
+.taskTitle {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.taskMeta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.timeSpan {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.clockIcon {
+    width: 16px;
+    height: 16px;
+}
+
+.priorityBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-left: 20px;
+}
+
+.priorityHigh {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.priorityMedium {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.priorityLow {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.checkbox {
+    cursor: pointer;
+}
+
+.checkbox:hover {
+    border-color: #1a73e8;
+}

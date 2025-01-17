@@ -3,23 +3,47 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { GoTasklist } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
+import { Pages } from "../../App";
 
-const LeftSideBar = () => {
+interface Props {
+    setPage: (c: Pages) => void;
+    page: Pages;
+}
+
+const LeftSideBar = ({ setPage, page }: Props) => {
+    const pageChangeHandler = (c: Pages) => {
+        return setPage(c);
+    };
     return (
         <div className={styles.leftsidebardiv}>
             <h1 className={styles.sitename}>Verto</h1>
             <nav className={styles.navLinks}>
-                <div className={`${styles.linkcontainer} ${styles.active}`}>
+                <div
+                    onClick={() => pageChangeHandler("D")}
+                    className={`${styles.linkcontainer} ${
+                        page == "D" ? styles.active : ""
+                    }`}
+                >
                     <LuLayoutDashboard
                         className={styles.icon}
                     ></LuLayoutDashboard>
                     <span>Dashboard</span>
                 </div>
-                <div className={styles.linkcontainer}>
+                <div
+                    onClick={() => pageChangeHandler("C")}
+                    className={`${styles.linkcontainer} ${
+                        page == "C" ? styles.active : ""
+                    }`}
+                >
                     <IoPersonOutline className={styles.icon}></IoPersonOutline>
                     <span>Calendar</span>
                 </div>
-                <div className={styles.linkcontainer}>
+                <div
+                    onClick={() => pageChangeHandler("T")}
+                    className={`${styles.linkcontainer} ${
+                        page == "T" ? styles.active : ""
+                    }`}
+                >
                     <GoTasklist className={styles.icon}></GoTasklist>
                     <span>Tasklist</span>
                 </div>

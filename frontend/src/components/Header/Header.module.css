@@ -3,4 +3,6 @@
     padding: 13px 0px;
     display: flex;
     justify-content: space-between;
+    height: 40px;
+    flex-shrink: 0;
 }
