@@ -1,0 +1,22 @@
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.item {
+    text-align: center;
+}
+
+.value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+.label {
+    color: #666;
+    font-size: 0.875rem;
+}

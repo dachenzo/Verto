@@ -53,7 +53,10 @@ const LeftSideBar = ({ setPage, page }: Props) => {
                     ></IoSettingsOutline>
                     <span>Settings</span>
                 </div>
-                <div className={styles.linkcontainer}>
+                <div
+                    onClick={() => pageChangeHandler("P")}
+                    className={styles.linkcontainer}
+                >
                     <IoPersonOutline className={styles.icon}></IoPersonOutline>
                     <span>Profile</span>
                 </div>

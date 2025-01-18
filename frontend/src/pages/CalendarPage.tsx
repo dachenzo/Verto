@@ -6,8 +6,8 @@ import CurrentMonth from "../components/CalendarComponents/CurrentMonth/CurrentM
 import DayColumn from "../components/CalendarComponents/DayColumn/DayColumn";
 import WeekGrid from "../components/CalendarComponents/WeekGrid/WeekGrid";
 import Canvas from "../components/Canvas/Canvas";
-import Header from "../components/Header/Header";
-import ProfileAtHeader from "../components/ProfileAtHeader/ProfileAtHeader";
+import Header from "../components/HeaderComponents/Header/Header";
+import ProfileAtHeader from "../components/HeaderComponents/ProfileAtHeader/ProfileAtHeader";
 import SearchBar from "../components/SearchBar/SearchBar";
 import CalendarTask from "../components/CalendarComponents/CalendarTask/CalendarTask";
 

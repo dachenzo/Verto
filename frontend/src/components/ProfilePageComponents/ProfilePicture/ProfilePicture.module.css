@@ -1,0 +1,23 @@
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #1a73e8;
+    margin: 0 auto 1.5rem;
+    position: relative;
+}
+
+.editAvatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #1a73e8;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

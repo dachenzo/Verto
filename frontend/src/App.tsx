@@ -13,13 +13,15 @@ import Dashboard from "./pages/Dashboard";
 
 import CalendarPage from "./pages/CalendarPage";
 import { useState } from "react";
-export type Pages = "D" | "T" | "C";
+import ProfilePage from "./pages/ProfilePage";
+export type Pages = "D" | "T" | "C" | "P";
 
 function App() {
     const page_map: Record<Pages, JSX.Element> = {
         C: <CalendarPage></CalendarPage>,
         T: <TaskListPage></TaskListPage>,
         D: <Dashboard></Dashboard>,
+        P: <ProfilePage></ProfilePage>,
     };
 
     const [page, setPage] = useState<Pages>("D");
