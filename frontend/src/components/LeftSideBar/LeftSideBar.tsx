@@ -47,7 +47,10 @@ const LeftSideBar = ({ setPage, page }: Props) => {
                     <GoTasklist className={styles.icon}></GoTasklist>
                     <span>Tasklist</span>
                 </div>
-                <div className={styles.linkcontainer}>
+                <div
+                    onClick={() => pageChangeHandler("S")}
+                    className={styles.linkcontainer}
+                >
                     <IoSettingsOutline
                         className={styles.icon}
                     ></IoSettingsOutline>

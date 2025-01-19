@@ -38,9 +38,6 @@ const Dashboard = () => {
                     <DashboardTask></DashboardTask>
                     <DashboardTask></DashboardTask>
                     <DashboardTask></DashboardTask>
-                    <DashboardTask></DashboardTask>
-                    <DashboardTask></DashboardTask>
-                    <DashboardTask></DashboardTask>
                 </DeadlineTaskCard>
             </DashboardContainer>
         </Canvas>
