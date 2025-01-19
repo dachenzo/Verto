@@ -1,38 +1,37 @@
-// TASKLIST PAGE
+// import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 
-//LOGIN COMPONENTS
+// import ScreenBody from "./components/ScreenBody/ScreenBody";
 
-import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
+// import TaskListPage from "./pages/TaskListPage";
+// import Dashboard from "./pages/Dashboard";
 
-import ScreenBody from "./components/ScreenBody/ScreenBody";
-
-import TaskListPage from "./pages/TaskListPage";
-import Dashboard from "./pages/Dashboard";
-
-// import DashHeader from "./components/DashHeader/DashHeader";
-
-import CalendarPage from "./pages/CalendarPage";
-import { useState } from "react";
-import ProfilePage from "./pages/ProfilePage";
-import SettingsPage from "./pages/SettingsPage";
+// import CalendarPage from "./pages/CalendarPage";
+// import { useState } from "react";
+// import ProfilePage from "./pages/ProfilePage";
+// import SettingsPage from "./pages/SettingsPage";
+import MainPage from "./pages/MainPage";
 export type Pages = "D" | "T" | "C" | "P" | "S";
 
 function App() {
-    const page_map: Record<Pages, JSX.Element> = {
-        C: <CalendarPage></CalendarPage>,
-        T: <TaskListPage></TaskListPage>,
-        D: <Dashboard></Dashboard>,
-        P: <ProfilePage></ProfilePage>,
-        S: <SettingsPage></SettingsPage>,
-    };
+    // const page_map: Record<Pages, JSX.Element> = {
+    //     C: <CalendarPage></CalendarPage>,
+    //     T: <TaskListPage></TaskListPage>,
+    //     D: <Dashboard></Dashboard>,
+    //     P: <ProfilePage></ProfilePage>,
+    //     S: <SettingsPage></SettingsPage>,
+    // };
 
-    const [page, setPage] = useState<Pages>("D");
+    // const [page, setPage] = useState<Pages>("D");
+    // const [isLandingPage, setIsLandingPage] = useState<boolean>(true);
 
     return (
-        <ScreenBody>
-            <LeftSideBar page={page} setPage={setPage}></LeftSideBar>
-            {page_map[page]}
-        </ScreenBody>
+        <>
+            {/* <ScreenBody>
+                <LeftSideBar page={page} setPage={setPage}></LeftSideBar>
+                {page_map[page]}
+            </ScreenBody> */}
+            <MainPage></MainPage>
+        </>
     );
 }
 
