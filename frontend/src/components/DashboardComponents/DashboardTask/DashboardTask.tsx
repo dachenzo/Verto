@@ -1,7 +1,9 @@
-import { IoSettingsOutline } from "react-icons/io5";
 import styles from "./DashboardTask.module.css";
+import EditTask from "../../EditTask/EditTask";
+import { useState } from "react";
 
 const DashboardTask = () => {
+    // const [isEdit, setIsEdit] = useState<boolean>(false);
     return (
         <div className={styles.taskItem}>
             <input type="checkbox" className={styles.checkbox} />
@@ -21,12 +23,12 @@ const DashboardTask = () => {
                         </svg>
                         10:00 AM - 11:30 AM
                     </div>
-                    <span className={`${styles.priorityBadge}`}>
+                    <span className={`${styles.priorityBadge} ${styles.high}`}>
                         High Priority
                     </span>
                 </div>
             </div>
-            <IoSettingsOutline></IoSettingsOutline>
+            <EditTask></EditTask>
         </div>
     );
 };

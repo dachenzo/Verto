@@ -4,6 +4,7 @@ import { GoTasklist } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import { Pages } from "../../App";
+import NewTaskBtn from "../NewTaskBtn/NewTaskBtn";
 
 interface Props {
     setPage: (c: Pages) => void;
@@ -14,9 +15,11 @@ const LeftSideBar = ({ setPage, page }: Props) => {
     const pageChangeHandler = (c: Pages) => {
         return setPage(c);
     };
+
     return (
         <div className={styles.leftsidebardiv}>
             <h1 className={styles.sitename}>Verto</h1>
+            <NewTaskBtn></NewTaskBtn>
             <nav className={styles.navLinks}>
                 <div
                     onClick={() => pageChangeHandler("D")}
