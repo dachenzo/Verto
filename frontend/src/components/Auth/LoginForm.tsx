@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./Auth.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface LoginData {
     email: string;
@@ -12,7 +13,10 @@ const LoginForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm<LoginData>();
+
+    const navigate = useNavigate();
     const submit = (data: LoginData) => {
+        navigate("/main");
         console.log(data);
     };
     return (

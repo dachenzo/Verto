@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./Auth.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface SignUpData {
     username: string;
@@ -15,7 +16,9 @@ const SignUpForm = () => {
         watch,
         formState: { errors },
     } = useForm<SignUpData>();
+    const navigate = useNavigate();
     const submit = (data: SignUpData) => {
+        navigate("/main");
         console.log(data);
     };
 
