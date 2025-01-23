@@ -17,11 +17,14 @@ const NewCalendarTaskForm = ({ setIsNewTaskForm }: Props) => {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
     } = useForm<CalendarTaskData>();
     const submit = (data: CalendarTaskData) => {
         console.log(data);
     };
+
+    const startDate = watch("startDate");
     return (
         <form id="newCalendarTaskForm" onSubmit={handleSubmit(submit)}>
             <div className={styles.formGroup}>
@@ -78,6 +81,15 @@ const NewCalendarTaskForm = ({ setIsNewTaskForm }: Props) => {
                     className={styles.formInput}
                     {...register("startDate", {
                         required: "Start date is required",
+                        validate: {
+                            futureDate: (value) => {
+                                const now = new Date();
+                                return (
+                                    new Date(value) > now ||
+                                    "Must be a future Date"
+                                );
+                            },
+                        },
                     })}
                 />
                 {errors.startDate && (
@@ -94,6 +106,18 @@ const NewCalendarTaskForm = ({ setIsNewTaskForm }: Props) => {
                     className={styles.formInput}
                     {...register("endDate", {
                         required: "End date is required",
+                        validate: {
+                            futureDate: (value) => {
+                                const now = new Date();
+                                return (
+                                    new Date(value) > now ||
+                                    "Must be a future Date"
+                                );
+                            },
+                            validEndDate: (value) =>
+                                value > startDate ||
+                                "End date must be later than start date",
+                        },
                     })}
                 />
                 {errors.endDate && (

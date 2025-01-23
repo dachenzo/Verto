@@ -1,15 +1,44 @@
+import { useForm } from "react-hook-form";
 import styles from "./Auth.module.css";
 
+interface SignUpData {
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
 const SignUpForm = () => {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<SignUpData>();
+    const submit = (data: SignUpData) => {
+        console.log(data);
+    };
+
+    const password = watch("password");
     return (
-        <form id="signupForm" className={styles.active}>
+        <form
+            id="signupForm"
+            className={styles.active}
+            onSubmit={handleSubmit(submit)}
+        >
             <div className={styles.formGroup}>
-                <label className={styles.formLabel}>Full Name</label>
+                <label className={styles.formLabel}>UserName</label>
                 <input
                     type="text"
                     className={styles.formInput}
-                    placeholder="Enter your name"
+                    placeholder="Enter your Username"
+                    {...register("username", {
+                        required: "Username is required",
+                    })}
                 />
+                {errors.username && (
+                    <p className={styles.e}>{errors.username.message}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel}>Email</label>
@@ -17,7 +46,13 @@ const SignUpForm = () => {
                     type="email"
                     className={styles.formInput}
                     placeholder="Enter your email"
+                    {...register("email", {
+                        required: "Email is required",
+                    })}
                 />
+                {errors.email && (
+                    <p className={styles.e}>{errors.email.message}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel}>Password</label>
@@ -25,7 +60,30 @@ const SignUpForm = () => {
                     type="password"
                     className={styles.formInput}
                     placeholder="Create a password"
+                    {...register("password", {
+                        required: "Password is required",
+                    })}
                 />
+                {errors.password && (
+                    <p className={styles.e}>{errors.password.message}</p>
+                )}
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel}>ConfirmPassword</label>
+                <input
+                    type="password"
+                    className={styles.formInput}
+                    placeholder="Confirm your password"
+                    {...register("confirmPassword", {
+                        required: "ConfirmPassword",
+                        validate: (value) => {
+                            return value === password || "Passwords must match";
+                        },
+                    })}
+                />
+                {errors.confirmPassword && (
+                    <p className={styles.e}>{errors.confirmPassword.message}</p>
+                )}
             </div>
             <button type="submit" className={styles.authButton}>
                 Sign Up

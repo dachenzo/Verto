@@ -9,9 +9,6 @@ import CalendarPage from "./pages/CalendarPage";
 import { useState } from "react";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
-import EditTask from "./components/EditTask/EditTask";
-import EditTaskForm from "./components/TaskForms/EditTaskForm";
-import NewTaskForm from "./components/TaskForms/NewTaskForm";
 
 // import MainPage from "./pages/MainPage";
 export type Pages = "D" | "T" | "C" | "P" | "S";
@@ -26,7 +23,6 @@ function App() {
     };
 
     const [page, setPage] = useState<Pages>("D");
-    // const [isLandingPage, setIsLandingPage] = useState<boolean>(true);
 
     return (
         <>

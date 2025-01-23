@@ -80,6 +80,15 @@ const NewDeadlineTaskForm = ({ setIsNewTaskForm }: Props) => {
                         className={styles.formInput}
                         {...register("deadline", {
                             required: "Deadline is required",
+                            validate: {
+                                futureDate: (value) => {
+                                    const now = new Date();
+                                    return (
+                                        new Date(value) > now ||
+                                        "Must be a future Date"
+                                    );
+                                },
+                            },
                         })}
                     />
                     {errors.deadline && (

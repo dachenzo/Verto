@@ -1,15 +1,39 @@
+import { useForm } from "react-hook-form";
 import styles from "./Auth.module.css";
 
+interface LoginData {
+    email: string;
+    password: string;
+}
+
 const LoginForm = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginData>();
+    const submit = (data: LoginData) => {
+        console.log(data);
+    };
     return (
-        <form id="loginForm" className={styles.active}>
+        <form
+            id="loginForm"
+            className={styles.active}
+            onSubmit={handleSubmit(submit)}
+        >
             <div className={styles.formGroup}>
                 <label className={styles.formLabel}>Email</label>
                 <input
                     type="email"
                     className={styles.formInput}
                     placeholder="Enter your email"
+                    {...register("email", {
+                        required: "Email is required",
+                    })}
                 />
+                {errors.email && (
+                    <p className={styles.e}>{errors.email.message}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel}>Password</label>
@@ -17,7 +41,13 @@ const LoginForm = () => {
                     type="password"
                     className={styles.formInput}
                     placeholder="Enter your password"
+                    {...register("password", {
+                        required: "Password is required",
+                    })}
                 />
+                {errors.password && (
+                    <p className={styles.e}>{errors.password.message}</p>
+                )}
             </div>
             <button type="submit" className={styles.authButton}>
                 Login
