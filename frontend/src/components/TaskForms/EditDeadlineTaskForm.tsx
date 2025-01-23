@@ -1,12 +1,24 @@
+import { useForm } from "react-hook-form";
 import styles from "./TaskForms.module.css";
 
 interface Props {
     cancelEdit: (x: boolean) => void;
 }
 
+interface EditDeadlineTaskData {
+    title?: string;
+    description?: string;
+    priority?: "LOW" | "HIGH" | "MEDIUM";
+    deadline?: Date;
+}
+
 const EditDeadlineTaskForm = ({ cancelEdit }: Props) => {
+    const { register, handleSubmit } = useForm<EditDeadlineTaskData>();
+    const submit = (data: EditDeadlineTaskData) => {
+        console.log(data);
+    };
     return (
-        <form id="editDeadlineTaskForm">
+        <form id="editDeadlineTaskForm" onSubmit={handleSubmit(submit)}>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel} htmlFor="taskTitle">
                     Task Title
@@ -16,7 +28,7 @@ const EditDeadlineTaskForm = ({ cancelEdit }: Props) => {
                     id="taskTitle"
                     className={styles.formInput}
                     placeholder="Enter task title"
-                    required
+                    {...register("title")}
                 />
             </div>
             <div className={styles.formGroup}>
@@ -27,13 +39,18 @@ const EditDeadlineTaskForm = ({ cancelEdit }: Props) => {
                     id="taskDescription"
                     className={styles.formInput}
                     placeholder="Enter task description"
+                    {...register("description")}
                 ></textarea>
             </div>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel} htmlFor="taskPriority">
                     Priority
                 </label>
-                <select id="taskPriority" className="form-select" required>
+                <select
+                    id="taskPriority"
+                    className="form-select"
+                    {...register("priority")}
+                >
                     <option value="low">Low Priority</option>
                     <option value="medium">Medium Priority</option>
                     <option value="high">High Priority</option>
@@ -47,7 +64,7 @@ const EditDeadlineTaskForm = ({ cancelEdit }: Props) => {
                     type="datetime-local"
                     id="taskDueDate"
                     className={styles.formInput}
-                    required
+                    {...register("deadline")}
                 />
             </div>
 

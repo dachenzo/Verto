@@ -1,99 +1,45 @@
-// import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styles from "./TaskForms.module.css";
 
-// import
-
-// interface Props {
-//     handleClick: () => void;
-// }
-
-// interface Data {
-//     title: string;
-//     description?: string;
-//     deadline: string;
-// }
+interface DeadlineTaskData {
+    title: string;
+    description?: string;
+    priority?: "LOW" | "HIGH" | "MEDIUM";
+    deadline: Date;
+}
 
 interface Props {
     setIsNewTaskForm: (x: boolean) => void;
 }
 const NewDeadlineTaskForm = ({ setIsNewTaskForm }: Props) => {
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     formState: { errors },
-    // } = useForm<Data>();
-    // const submit = (data: Data) => {
-    //     console.log(data);
-    // };
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<DeadlineTaskData>();
+    const submit = (data: DeadlineTaskData) => {
+        console.log(data);
+    };
+
     return (
-        // <>
-        // <div className={styles.backdrop}>
-        //     <FormCard>
-        //         <div className={styles.closebtncontainer}>
-        //             <IoMdCloseCircleOutline
-        //                 className={styles.icon}
-        //                 onClick={handleClick}
-        //             ></IoMdCloseCircleOutline>
-        //         </div>
-        //         <form action="" onSubmit={handleSubmit(submit)}>
-        //             <label className={styles.formLabel} htmlFor="title">
-        //                 Title
-        //             </label>
-        //             {errors.title && (
-        //                 <p className={styles.e}>{errors.title.message}</p>
-        //             )}
-        //             <input
-        //                 {...register("title", {
-        //                     required: "Title is required",
-        //                 })}
-        //                 className={styles.formInput}
-        //                 type="text"
-        //                 id="title"
-        //                 name="title" />
-
-        //             <label className={styles.formLabel} htmlFor="description">
-        //                 Description
-        //             </label>
-        //             <input
-        //                 {...register("description")}
-        //                 className={styles.formInput}
-        //                 type="text"
-        //                 id="description"
-        //                 name="description" />
-
-        //             <label className={styles.formLabel} htmlFor="deadline">
-        //                 Deadline
-        //             </label>
-        //             {errors.deadline && (
-        //                 <p className={styles.e}>{errors.deadline.message}</p>
-        //             )}
-        //             <input
-        //                 {...register("deadline", {
-        //                     required: "deadline is required",
-        //                 })}
-        //                 className={styles.formInput}
-        //                 type="date"
-        //                 id="deadline"
-        //                 name="deadline" />
-        //             <button className={styles.btn} type="submit">
-        //                 Create
-        //             </button>
-        //         </form>
-        //     </FormCard>
-        // </div>
         <>
-            <form id="newDeadlineTaskForm">
+            <form id="newDeadlineTaskForm" onSubmit={handleSubmit(submit)}>
                 <div className={styles.formGroup}>
                     <label className={styles.formLabel} htmlFor="taskTitle">
                         Task Title
                     </label>
                     <input
+                        {...register("title", {
+                            required: "Title is required",
+                        })}
                         type="text"
                         id="taskTitle"
                         className={styles.formInput}
                         placeholder="Enter task title"
-                        required
                     />
+                    {errors.title && (
+                        <p className={styles.e}>{errors.title.message}</p>
+                    )}
                 </div>
                 <div className={styles.formGroup}>
                     <label
@@ -106,16 +52,22 @@ const NewDeadlineTaskForm = ({ setIsNewTaskForm }: Props) => {
                         id="taskDescription"
                         className={styles.formInput}
                         placeholder="Enter task description"
+                        {...register("description")}
                     ></textarea>
                 </div>
                 <div className={styles.formGroup}>
                     <label className={styles.formLabel} htmlFor="taskPriority">
                         Priority
                     </label>
-                    <select id="taskPriority" className="form-select" required>
-                        <option value="low">Low Priority</option>
-                        <option value="medium">Medium Priority</option>
-                        <option value="high">High Priority</option>
+                    <select
+                        id="taskPriority"
+                        className="form-select"
+                        {...register("priority")}
+                    >
+                        <option value=""></option>
+                        <option value="LOW">Low Priority</option>
+                        <option value="MEDIUM">Medium Priority</option>
+                        <option value="HIGH">High Priority</option>
                     </select>
                 </div>
                 <div className={styles.formGroup}>
@@ -126,8 +78,13 @@ const NewDeadlineTaskForm = ({ setIsNewTaskForm }: Props) => {
                         type="datetime-local"
                         id="taskDueDate"
                         className={styles.formInput}
-                        required
+                        {...register("deadline", {
+                            required: "Deadline is required",
+                        })}
                     />
+                    {errors.deadline && (
+                        <p className={styles.e}>{errors.deadline.message}</p>
+                    )}
                 </div>
 
                 <div className={styles.modalFooter}>

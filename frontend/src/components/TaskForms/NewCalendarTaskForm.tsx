@@ -1,29 +1,52 @@
+import { useForm } from "react-hook-form";
 import styles from "./TaskForms.module.css";
 
 interface Props {
     setIsNewTaskForm: (x: boolean) => void;
 }
 
+interface CalendarTaskData {
+    title: string;
+    description?: string;
+    startDate: Date;
+    endDate: Date;
+    priority?: "LOW" | "HIGH" | "MEDIUM";
+}
+
 const NewCalendarTaskForm = ({ setIsNewTaskForm }: Props) => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<CalendarTaskData>();
+    const submit = (data: CalendarTaskData) => {
+        console.log(data);
+    };
     return (
-        <form id="newCalendarTaskForm">
+        <form id="newCalendarTaskForm" onSubmit={handleSubmit(submit)}>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel} htmlFor="taskTitle">
                     Task Title
                 </label>
                 <input
+                    {...register("title", {
+                        required: "Title is required",
+                    })}
                     type="text"
                     id="taskTitle"
                     className={styles.formInput}
                     placeholder="Enter task title"
-                    required
                 />
+                {errors.title && (
+                    <p className={styles.e}>{errors.title.message}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel} htmlFor="taskDescription">
                     Description
                 </label>
                 <textarea
+                    {...register("description")}
                     id="taskDescription"
                     className={styles.formInput}
                     placeholder="Enter task description"
@@ -34,10 +57,15 @@ const NewCalendarTaskForm = ({ setIsNewTaskForm }: Props) => {
                 <label className={styles.formLabel} htmlFor="taskPriority">
                     Priority
                 </label>
-                <select id="taskPriority" className="form-select" required>
-                    <option value="low">Low Priority</option>
-                    <option value="medium">Medium Priority</option>
-                    <option value="high">High Priority</option>
+                <select
+                    id="taskPriority"
+                    className="form-select"
+                    {...register("priority")}
+                >
+                    <option value=""></option>
+                    <option value="LOW">Low Priority</option>
+                    <option value="MEDIUM">Medium Priority</option>
+                    <option value="HIGH">High Priority</option>
                 </select>
             </div>
             <div className={styles.formGroup}>
@@ -48,19 +76,29 @@ const NewCalendarTaskForm = ({ setIsNewTaskForm }: Props) => {
                     type="datetime-local"
                     id="taskStartDate"
                     className={styles.formInput}
-                    required
+                    {...register("startDate", {
+                        required: "Start date is required",
+                    })}
                 />
+                {errors.startDate && (
+                    <p className={styles.e}>{errors.startDate.message}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
                 <label className={styles.formLabel} htmlFor="taskEndDate">
-                    Start Date
+                    End Date
                 </label>
                 <input
                     type="datetime-local"
                     id="taskEndDate"
                     className={styles.formInput}
-                    required
+                    {...register("endDate", {
+                        required: "End date is required",
+                    })}
                 />
+                {errors.endDate && (
+                    <p className={styles.e}>{errors.endDate.message}</p>
+                )}
             </div>
             <div className={styles.modalFooter}>
                 <button
