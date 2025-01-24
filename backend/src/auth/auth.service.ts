@@ -23,7 +23,7 @@ export class AuthService {
     //TODO: remove any from login parametyer tpye
     async login(userId: number, email: string, user: User) {
         const payload = { sub: userId, email: email };
-        const accessToken = this.jwtservice.sign(payload);
+        const accessToken = this.jwtservice.sign(payload, { expiresIn: '15m' });
         const refreshToken = this.jwtservice.sign(payload, { expiresIn: '7d' });
         const salt = await bcrypt.genSalt();
         const hashedRefreshToken = await bcrypt.hash(refreshToken, salt);
@@ -50,7 +50,9 @@ export class AuthService {
             throw new UnauthorizedException('Invalid refresh token');
         }
 
-        const newAccessToken = this.jwtservice.sign(payload);
+        const newAccessToken = this.jwtservice.sign(payload, {
+            expiresIn: '15m',
+        });
         const newRefreshToken = this.jwtservice.sign(payload, {
             expiresIn: '7d',
         });
