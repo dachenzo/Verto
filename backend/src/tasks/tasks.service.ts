@@ -16,7 +16,7 @@ export class TasksService {
         @InjectRepository(Task) private repo: Repository<Task>,
         private userService: UserService,
     ) {}
-    async createTask(task) {
+    async createTask(task: any) {
         //TODO: lack of type for task might be a problem
         const user = await this.userService.getUserById(task.userId);
 
@@ -46,7 +46,7 @@ export class TasksService {
     }
 
     //TODO: need to remove the implicit any here
-    async updateTask(task, taskId: number) {
+    async updateTask(task: any, taskId: number) {
         //TODO:  partial might not have id
         const currentTask = await this.getTaskById(taskId, task.userId);
         if (task.type !== currentTask.type) {

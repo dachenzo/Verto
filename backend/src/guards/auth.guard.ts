@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
         }
 
         const request = context.switchToHttp().getRequest();
-        const token = this.extractTokenFromHeader(request);
+        const token = this.extractTokenFromCookie(request);
         // console.log('Token: ', token);
 
         if (!token) {
@@ -43,14 +43,6 @@ export class AuthGuard implements CanActivate {
                 secret: process.env.JWT_SECRET_KEY,
             });
 
-            const isBlacklisted =
-                await this.redisService.isTokenBlackListed(token);
-
-            if (isBlacklisted) {
-                console.log('Blacklisted');
-                throw new UnauthorizedException('Token is blacklisted');
-            }
-
             request.user = payload;
             return true;
         } catch (err) {
@@ -58,14 +50,8 @@ export class AuthGuard implements CanActivate {
         }
     }
 
-    extractTokenFromHeader(request: Request) {
-        const authHeader = request.headers.authorization as String | undefined;
-
-        if (!authHeader) {
-            return null;
-        }
-
-        const [type, token] = authHeader.split(' ');
-        return type === 'Bearer' ? token : null;
+    extractTokenFromCookie(request: Request) {
+        const accessToken = request.cookies.accessToken;
+        return accessToken;
     }
 }
