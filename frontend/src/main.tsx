@@ -1,12 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-// import "bootstrap/dist/css/bootstrap.css";
 import "./Global.css";
-import "react-big-calendar/lib/css/react-big-calendar.css";
+import { AuthProvider } from "./contexts/AuthContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <App />
+        <AuthProvider>
+            <App />
+        </AuthProvider>
     </StrictMode>
 );

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./Auth.module.css";
-import { useNavigate } from "react-router-dom";
+import useSignUp from "../../customHooks/useSignUp";
 
 interface SignUpData {
     username: string;
@@ -10,16 +10,17 @@ interface SignUpData {
 }
 
 const SignUpForm = () => {
+    const { error, signUp } = useSignUp();
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
     } = useForm<SignUpData>();
-    const navigate = useNavigate();
-    const submit = (data: SignUpData) => {
-        navigate("/main");
-        console.log(data);
+
+    const submit = ({ username, email, password }: SignUpData) => {
+        signUp(email, password, username);
+        console.log(error);
     };
 
     const password = watch("password");

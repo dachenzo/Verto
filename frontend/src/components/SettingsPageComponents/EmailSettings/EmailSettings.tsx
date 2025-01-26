@@ -9,14 +9,14 @@ const EmailSettings = () => {
                 </h3>
                 <div className={styles.checkboxGroup}>
                     <label className={styles.checkboxItem}>
-                        <input type="checkbox" checked />
+                        <input type="checkbox" defaultChecked={true} />
                         High Priority
                         <span className={`${styles.tag} ${styles.high}`}>
                             High
                         </span>
                     </label>
                     <label className={styles.checkboxItem}>
-                        <input type="checkbox" checked />
+                        <input type="checkbox" defaultChecked={false} />
                         Medium Priority
                         <span className={`${styles.tag} ${styles.med}`}>
                             Medium
@@ -36,12 +36,10 @@ const EmailSettings = () => {
                     Send notification before event:
                 </h3>
                 <div className={styles.selectGroup}>
-                    <select>
+                    <select defaultValue={"15"}>
                         <option value="5">5 minutes before</option>
                         <option value="10">10 minutes before</option>
-                        <option value="15" selected>
-                            15 minutes before
-                        </option>
+                        <option value="15">15 minutes before</option>
                         <option value="30">30 minutes before</option>
                         <option value="60">1 hour before</option>
                         <option value="120">2 hours before</option>

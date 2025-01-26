@@ -1,23 +1,22 @@
 import { useForm } from "react-hook-form";
 import styles from "./Auth.module.css";
-import { useNavigate } from "react-router-dom";
-
+import useLogin from "../../customHooks/useLogin";
 interface LoginData {
     email: string;
     password: string;
 }
 
 const LoginForm = () => {
+    const { login, error } = useLogin();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<LoginData>();
 
-    const navigate = useNavigate();
-    const submit = (data: LoginData) => {
-        navigate("/main");
-        console.log(data);
+    const submit = ({ email, password }: LoginData) => {
+        login(email, password);
+        console.log(error);
     };
     return (
         <form

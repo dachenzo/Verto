@@ -1,4 +1,4 @@
-import useTasks from "../temphooks/useTasks";
+import useTasks from "../customHooks/useTasks";
 
 const tempAPICallExample = () => {
     const { data, error } = useTasks();

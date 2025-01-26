@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    Post,
+    Req,
+    Res,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserLoginDto } from './dtos/user-login-dto';
 import { UserRegisterDto } from './dtos/user-register-dto';
@@ -15,6 +23,26 @@ export class AuthController {
         private redisService: JwtRedisService,
         private jwtService: JwtService,
     ) {}
+
+    @Public()
+    @Get('/me')
+    async me(@Req() request: Request) {
+        const accessToken = request.cookies?.accessToken;
+
+        if (!accessToken) {
+            throw new UnauthorizedException('Access token not found');
+        }
+
+        try {
+            const payload = this.jwtService.verify(accessToken, {
+                secret: process.env.JWT_SECRET_KEY,
+            });
+
+            return { userId: payload.sub, email: payload.email };
+        } catch (err) {
+            throw new UnauthorizedException('Invalid or Expired Token');
+        }
+    }
 
     @Public()
     @Post('/login')
