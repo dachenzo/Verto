@@ -3,8 +3,9 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { GoTasklist } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
-import { Pages } from "../../App";
+import { Pages } from "../../pages/MainPage";
 import NewTaskBtn from "../NewTaskBtn/NewTaskBtn";
+import LogOut from "../LogOut/LogOut";
 
 interface Props {
     setPage: (c: Pages) => void;
@@ -66,6 +67,7 @@ const LeftSideBar = ({ setPage, page }: Props) => {
                     <IoPersonOutline className={styles.icon}></IoPersonOutline>
                     <span>Profile</span>
                 </div>
+                <LogOut></LogOut>
             </nav>
         </div>
     );

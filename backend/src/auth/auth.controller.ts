@@ -30,7 +30,7 @@ export class AuthController {
         const accessToken = request.cookies?.accessToken;
 
         if (!accessToken) {
-            throw new UnauthorizedException('Access token not found');
+            return 'NOT_LOGGED_IN';
         }
 
         try {

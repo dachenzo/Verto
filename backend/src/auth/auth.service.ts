@@ -40,6 +40,7 @@ export class AuthService {
     async refreshToken(token: string) {
         const payload = this.jwtservice.verify(token);
         const user = await this.userService.getUserById(payload.sub);
+        const { exp, newPayload } = payload;
 
         if (!user) {
             throw new UnauthorizedException('Invalid User');
@@ -50,10 +51,10 @@ export class AuthService {
             throw new UnauthorizedException('Invalid refresh token');
         }
 
-        const newAccessToken = this.jwtservice.sign(payload, {
+        const newAccessToken = this.jwtservice.sign(newPayload, {
             expiresIn: '15m',
         });
-        const newRefreshToken = this.jwtservice.sign(payload, {
+        const newRefreshToken = this.jwtservice.sign(newPayload, {
             expiresIn: '7d',
         });
         const salt = await bcrypt.genSalt();

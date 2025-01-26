@@ -25,9 +25,13 @@ export const AuthProvider = ({ children }: Props) => {
             apiClient
                 .get("/auth/me")
                 .then((data) => {
-                    setIsLoggedIn(true);
-                    setLoading(false);
-                    console.log(data);
+                    if (data.data === "NOT_LOGGED_IN") {
+                        setIsLoggedIn(false);
+                        setLoading(false);
+                    } else {
+                        setIsLoggedIn(true);
+                        setLoading(false);
+                    }
                 })
                 .catch((err) => {
                     setIsLoggedIn(false);
@@ -45,5 +49,6 @@ export const AuthProvider = ({ children }: Props) => {
         </AuthContext.Provider>
     );
 };
+const useAuth = () => useContext(AuthContext);
 
-export const useAuth = () => useContext(AuthContext);
+export { useAuth };
