@@ -1,0 +1,47 @@
+.userProfile {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-top: 1px solid #eee;
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+.userAvatar {
+    width: 32px;
+    height: 32px;
+    background: #1a73e8;
+    border-radius: 50%;
+}
+
+.userInfo {
+    flex: 1;
+}
+
+.userName {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.userEmail {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.settingsButton {
+    padding: 0.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #666;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.settingsButton:hover {
+    background: #f5f7fa;
+    color: #333;
+}

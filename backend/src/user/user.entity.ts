@@ -1,3 +1,4 @@
+import { Project } from 'src/project/project.entity';
 import { Task } from 'src/tasks/task.entity';
 import {
     Entity,
@@ -27,4 +28,7 @@ export class User {
 
     @OneToMany(() => Task, (task) => task.user, { cascade: true })
     tasks: Task[];
+
+    @OneToMany(() => Project, (project) => project.user, { cascade: true })
+    projects: Project[];
 }

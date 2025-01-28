@@ -49,6 +49,7 @@ export class TasksService {
     async updateTask(task: any, taskId: number) {
         //TODO:  partial might not have id
         const currentTask = await this.getTaskById(taskId, task.userId);
+
         if (task.type !== currentTask.type) {
             throw new BadRequestException(
                 `Task type cannot be updated, current type is ${currentTask.type}`,
@@ -58,7 +59,7 @@ export class TasksService {
         if (task.endTime) {
             if (task.endTime < currentTask.startTime) {
                 throw new BadRequestException(
-                    `End time cannot be earleir than start time`,
+                    `End time cannot be earlier than start time`,
                 );
             }
         }

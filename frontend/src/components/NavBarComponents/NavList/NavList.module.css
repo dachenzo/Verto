@@ -1,0 +1,30 @@
+.navLink {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    margin-bottom: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.navLink:hover {
+    background: #f5f7fa;
+}
+
+.navLink.active {
+    background: #e8f0fe;
+    color: #1a73e8;
+}
+
+.navLink svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+.navLink.active svg {
+    color: #1a73e8;
+}

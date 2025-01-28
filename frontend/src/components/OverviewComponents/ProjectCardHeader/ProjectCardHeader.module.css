@@ -1,0 +1,54 @@
+.projectHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.projectTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.projectSubtitle {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.projectStatus {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.statusActive {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.statusReview {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.priorityBadge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.high {
+    background: #dc3545;
+}
+
+.medium {
+    background: #f57c00;
+}
+
+.low {
+    background: #2e7d32;
+}

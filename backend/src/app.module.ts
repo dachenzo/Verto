@@ -10,6 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthCoreModule } from './auth-core/auth-core.module';
 import { User } from './user/user.entity';
 import { Task } from './tasks/task.entity';
+import { ProjectModule } from './project/project.module';
 
 @Module({
     imports: [
@@ -31,6 +32,8 @@ import { Task } from './tasks/task.entity';
         RedisModule,
 
         AuthCoreModule,
+
+        ProjectModule,
     ],
     controllers: [],
     providers: [

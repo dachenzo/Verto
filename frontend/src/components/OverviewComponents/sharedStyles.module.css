@@ -1,0 +1,30 @@
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btnPrimary {
+    background: #1a73e8;
+    color: white;
+    border: none;
+}
+
+.btnPrimary:hover {
+    background: #1557b0;
+}
+
+.btnOutline {
+    border: 1px solid #ddd;
+    background: white;
+    color: #333;
+}
+
+.btnOutline:hover {
+    background: #f5f7fa;
+}
