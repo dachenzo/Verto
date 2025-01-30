@@ -1,0 +1,14 @@
+.cardTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.progressSection {
+    margin: 1.5rem 0;
+}
+
+.card {
+    flex-shrink: 0;
+}

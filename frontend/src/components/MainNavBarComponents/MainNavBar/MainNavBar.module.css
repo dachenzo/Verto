@@ -1,11 +1,12 @@
 .navSidebar {
-    width: 280px;
+    width: 220px;
     height: 100vh;
     background: white;
     border-right: 1px solid #eee;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .brand {

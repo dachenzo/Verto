@@ -1,0 +1,78 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.titleSection h1 {
+    font-size: 1.75rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.priorityBadge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.priorityHigh {
+    background: #dc3545;
+}
+
+.projectStatus {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.statusActive {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.subtitle {
+    color: #666;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btnPrimary {
+    background: #1a73e8;
+    color: white;
+    border: none;
+}
+
+.btnOutline {
+    border: 1px solid #ddd;
+    background: white;
+    color: #333;
+}

@@ -1,0 +1,25 @@
+.navTab:hover {
+    background: #f5f7fa;
+}
+
+.navTab.active {
+    background: #e8f0fe;
+    color: #1a73e8;
+}
+
+.navTab svg {
+    width: 20px;
+    height: 20px;
+}
+
+.navTab {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 0.7rem;
+    transition: all 0.2s ease;
+}

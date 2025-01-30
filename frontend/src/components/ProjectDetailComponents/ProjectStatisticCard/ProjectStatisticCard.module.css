@@ -1,0 +1,18 @@
+.analyticsCard {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.analyticsNumber {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.analyticsLabel {
+    font-size: 0.875rem;
+    color: #666;
+}

@@ -1,0 +1,38 @@
+.navTabs {
+    padding: 1rem;
+}
+
+.navTab {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.navTab:hover {
+    background: #f5f7fa;
+}
+
+.navTab.active {
+    background: #e8f0fe;
+    color: #1a73e8;
+}
+
+.navTab svg {
+    width: 20px;
+    height: 20px;
+}
+
+.navSectionTitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1.5rem 1rem 0.5rem 1rem;
+}

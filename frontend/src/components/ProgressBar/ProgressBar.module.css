@@ -22,4 +22,5 @@
     background: #1a73e8;
     border-radius: 3px;
     transition: width 0.3s ease;
+    width: 75%;
 }

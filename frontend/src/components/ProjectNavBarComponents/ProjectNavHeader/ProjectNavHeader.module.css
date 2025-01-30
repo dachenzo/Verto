@@ -1,0 +1,41 @@
+.navHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.navProjectTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.navProjectSubtitle {
+    font-size: 0.875rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.priorityBadge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.priorityHigh {
+    background: #dc3545;
+}
+
+.projectStatus {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.statusActive {
+    background: #e8f5e9;
+    color: #2e7d32;
+}

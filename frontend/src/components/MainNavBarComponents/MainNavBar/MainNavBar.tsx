@@ -1,14 +1,14 @@
 import NavList from "../NavList/NavList";
 import NavProfile from "../NavProfile/NavProfile";
 import ProjectList from "../ProjectList/ProjectList";
-import styles from "./NavBar.module.css";
+import styles from "./MainNavBar.module.css";
 
-const NavBar = () => {
+const MainNavBar = () => {
     return (
         <nav className={styles.navSidebar}>
             <div className={styles.brand}>
                 <div className={styles.brandLogo}></div>
-                <div className={styles.brandName}>TaskMaster</div>
+                <div className={styles.brandName}>Verto</div>
             </div>
             <NavList></NavList>
             <ProjectList></ProjectList>
@@ -17,4 +17,4 @@ const NavBar = () => {
     );
 };
 
-export default NavBar;
+export default MainNavBar;

@@ -1,0 +1,57 @@
+.taskItem {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    background: white;
+    transition: background-color 0.2s ease;
+}
+
+.taskItem:hover {
+    background: #f8f9fa;
+}
+
+.taskItem:last-child {
+    border-bottom: none;
+}
+
+.taskCheckbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-top: 0.25rem;
+    cursor: pointer;
+}
+
+.taskCheckbox.completed {
+    background: #1a73e8;
+    border-color: #1a73e8;
+}
+
+.taskContent {
+    flex: 1;
+}
+
+.taskContent h3 {
+    font-size: 0.975rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.taskMeta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.taskMilestone {
+    background: #e8f0fe;
+    color: #1a73e8;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}

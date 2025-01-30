@@ -1,4 +1,4 @@
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../../ProgressBar/ProgressBar";
 import ProjectCardContainer from "../ProjectCardContainer/ProjectCardContainer";
 import ProjectCardHeader from "../ProjectCardHeader/ProjectCardHeader";
 import ProjectMeta from "../ProjectMeta/ProjectMeta";

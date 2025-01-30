@@ -1,0 +1,7 @@
+.projectNavBar {
+    width: 280px;
+    background: white;
+    border-right: 1px solid #eee;
+    height: 100vh;
+    overflow-y: auto;
+}
