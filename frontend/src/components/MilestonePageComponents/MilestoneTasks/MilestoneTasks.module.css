@@ -1,0 +1,16 @@
+.tasksHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.headerTitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.height {
+    height: 600px;
+}
