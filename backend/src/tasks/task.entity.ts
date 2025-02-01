@@ -1,3 +1,5 @@
+import { Milestone } from 'src/milestone/milestone.entity';
+import { MilestoneModule } from 'src/milestone/milestone.module';
 import { Project } from 'src/project/project.entity';
 import { User } from 'src/user/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
@@ -36,6 +38,12 @@ export class Task {
         onDelete: 'CASCADE',
     })
     project: Project;
+
+    @ManyToOne(() => Milestone, (milestone) => milestone.tasks, {
+        nullable: true,
+        onDelete: 'CASCADE',
+    })
+    milestone: Milestone;
 
     @ManyToOne(() => User, (user) => user.tasks, { onDelete: 'CASCADE' })
     user: User;

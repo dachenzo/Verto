@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage";
 import MainPage from "./pages/MainPage";
 
 import ProjectPage from "./pages/ProjectPage";
@@ -10,8 +10,8 @@ function App() {
     return (
         <Router>
             <Routes>
-                {/* <Route path="/" element={<HomePage />}></Route> */}
-                <Route path="/" element={<MainPage />}></Route>
+                <Route path="/" element={<HomePage />}></Route>
+                <Route path="/main" element={<MainPage />}></Route>
                 <Route path="/project/:projectId" element={<ProjectPage />}>
                     <Route path="" element={<ProjectDetail />}></Route>
                     <Route
@@ -21,10 +21,6 @@ function App() {
                 </Route>
             </Routes>
         </Router>
-        // <>
-        //     {/* <ProjectPage></ProjectPage> */}
-        //     {/* <MainPage></MainPage> */}
-        // </>
     );
 }
 

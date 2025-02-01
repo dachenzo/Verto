@@ -11,6 +11,7 @@ import { AuthCoreModule } from './auth-core/auth-core.module';
 import { User } from './user/user.entity';
 import { Task } from './tasks/task.entity';
 import { ProjectModule } from './project/project.module';
+import { MilestoneModule } from './milestone/milestone.module';
 
 @Module({
     imports: [
@@ -34,6 +35,8 @@ import { ProjectModule } from './project/project.module';
         AuthCoreModule,
 
         ProjectModule,
+
+        MilestoneModule,
     ],
     controllers: [],
     providers: [

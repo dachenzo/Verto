@@ -1,12 +1,17 @@
+import { Milestone } from 'src/milestone/milestone.entity';
 import { Task } from 'src/tasks/task.entity';
 import { User } from 'src/user/user.entity';
 import {
     Column,
     Entity,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
+import { ProjectUser } from './projectuser.entity';
 
 @Entity()
 export class Project {
@@ -31,9 +36,17 @@ export class Project {
     @Column({ default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
+    @UpdateDateColumn()
+    updatedAt: Date;
+
     @OneToMany(() => Task, (task) => task.project, { cascade: true })
     tasks: Task[];
 
-    @ManyToOne(() => User, (user) => user.projects, { onDelete: 'CASCADE' })
-    user: User;
+    @OneToMany(() => Milestone, (milestone) => milestone.project, {
+        cascade: true,
+    })
+    milestone: Milestone[];
+
+    @OneToMany(() => ProjectUser, (projectUser) => projectUser.project)
+    projectUsers: ProjectUser[];
 }

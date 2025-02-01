@@ -1,4 +1,5 @@
 import { Project } from 'src/project/project.entity';
+import { ProjectUser } from 'src/project/projectuser.entity';
 import { Task } from 'src/tasks/task.entity';
 import {
     Entity,
@@ -6,6 +7,7 @@ import {
     PrimaryGeneratedColumn,
     OneToMany,
     Index,
+    ManyToMany,
 } from 'typeorm';
 
 @Entity()
@@ -29,6 +31,6 @@ export class User {
     @OneToMany(() => Task, (task) => task.user, { cascade: true })
     tasks: Task[];
 
-    @OneToMany(() => Project, (project) => project.user, { cascade: true })
-    projects: Project[];
+    @OneToMany(() => ProjectUser, (projectUser) => projectUser.project)
+    projectUsers: ProjectUser[];
 }
