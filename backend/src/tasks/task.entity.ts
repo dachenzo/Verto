@@ -44,7 +44,4 @@ export class Task {
         onDelete: 'CASCADE',
     })
     milestone: Milestone;
-
-    @ManyToOne(() => User, (user) => user.tasks, { onDelete: 'CASCADE' })
-    user: User;
 }

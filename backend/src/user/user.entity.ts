@@ -28,9 +28,6 @@ export class User {
     @Column({ nullable: true })
     refreshToken: string;
 
-    @OneToMany(() => Task, (task) => task.user, { cascade: true })
-    tasks: Task[];
-
     @OneToMany(() => ProjectUser, (projectUser) => projectUser.project)
     projectUsers: ProjectUser[];
 }

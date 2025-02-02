@@ -21,5 +21,5 @@ export class CreateMilestoneDto {
     userId: number;
 
     @IsNotEmpty()
-    projectId: number;
+    orderIndex: number;
 }

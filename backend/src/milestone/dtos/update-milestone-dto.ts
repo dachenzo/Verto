@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { IsFutureDate } from 'src/validators/is-future-date.validator';
 
-export class UpdateProjectDto {
+export class UpdateMilestoneDto {
     @IsOptional()
     @IsString()
     title: string;
@@ -22,7 +22,4 @@ export class UpdateProjectDto {
 
     @IsNotEmpty()
     userId: number;
-
-    @IsNotEmpty()
-    projectId: number;
 }
