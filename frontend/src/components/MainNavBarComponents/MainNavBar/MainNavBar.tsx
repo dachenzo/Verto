@@ -1,3 +1,4 @@
+import LogOut from "../../LogOut/LogOut";
 import NavList from "../NavList/NavList";
 import NavProfile from "../NavProfile/NavProfile";
 import ProjectList from "../ProjectList/ProjectList";
@@ -13,6 +14,7 @@ const MainNavBar = () => {
             <NavList></NavList>
             <ProjectList></ProjectList>
             <NavProfile></NavProfile>
+            <LogOut></LogOut>
         </nav>
     );
 };

@@ -20,25 +20,25 @@ import { TaskSerializerDto } from './dtos/serialize.dt0';
 @Controller('/tasks')
 export class TasksController {
     constructor(private taskService: TasksService) {}
-    @Get()
-    getAllTasks(@Body() body: { userId: number }) {
-        return this.taskService.getAlltasks(body);
-    }
+    // @Get()
+    // getAllTasks(@Body() body: { userId: number }) {
+    //     return this.taskService.getAlltasks(body);
+    // }
 
     @Get('/:id')
     getTaskById(@Param('id') taskId: number, @Body() body: { userId: number }) {
         return this.taskService.getTaskById(taskId, body.userId);
     }
 
-    @Post()
-    createTask(@Body() body: CreateTaskDto) {
-        return this.taskService.createTask(body);
-    }
+    // @Post()
+    // createTask(@Body() body: CreateTaskDto) {
+    //     return this.taskService.createTask(body);
+    // }
 
-    @Patch('/:id')
-    updateTask(@Body() body: UpdateTaskDto, @Param('id') taskId: number) {
-        return this.taskService.updateTask(body, taskId);
-    }
+    // @Patch('/:id')
+    // updateTask(@Body() body: UpdateTaskDto, @Param('id') taskId: number) {
+    //     return this.taskService.updateTask(body, taskId);
+    // }
 
     @Delete('/:id')
     deleteTask(@Param('id') taskId: number, @Body() body: { userId: number }) {

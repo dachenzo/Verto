@@ -28,3 +28,13 @@
 .btnOutline:hover {
     background: #f5f7fa;
 }
+
+.btnSecondary {
+    background: white;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.btnSecondary:hover {
+    background: #f5f7fa;
+}

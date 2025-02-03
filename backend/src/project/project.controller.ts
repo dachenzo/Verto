@@ -44,7 +44,7 @@ export class ProjectController {
         @Body() body: UpdateProjectDto,
         @Param('id') projectId: number,
     ) {
-        this.projectService.updateProject(body);
+        this.projectService.updateProject(body, projectId);
     }
 
     @Delete('/:id')

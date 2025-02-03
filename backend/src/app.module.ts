@@ -31,11 +31,8 @@ import { MilestoneModule } from './milestone/milestone.module';
         TasksModule,
         AuthModule,
         RedisModule,
-
         AuthCoreModule,
-
         ProjectModule,
-
         MilestoneModule,
     ],
     controllers: [],
