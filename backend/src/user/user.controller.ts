@@ -18,6 +18,11 @@ import { UserSerializerDto } from './dtos/serializer-dto';
 export class UserController {
     constructor(private userService: UserService) {}
 
+    @Get('/')
+    getUser(@Body() body: { userId: number }) {
+        return this.userService.getUserById(body.userId);
+    }
+
     @Patch('/:id')
     updateUser(@Param('id') userId: string, @Body() body: UpdateUserDto) {
         return this.userService.updateUser(parseInt(userId), body);
