@@ -5,8 +5,10 @@ import MainPage from "./pages/MainPage";
 import ProjectPage from "./pages/ProjectPage";
 import ProjectDetail from "./components/ProjectDetailComponents/ProjectDetail/ProjectDetail";
 import MilestonePage from "./components/MilestonePageComponents/MilestonePage/MilestonePage";
+import useAuthRefresh from "./customHooks/useAuthRefresh";
 
 function App() {
+    useAuthRefresh();
     return (
         <Router>
             <Routes>

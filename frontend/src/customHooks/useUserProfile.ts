@@ -1,49 +1,36 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/apiClient";
 
-export interface Project {
-    projectId: number;
+export interface User {
+    userId: number;
 
-    title: string;
+    email: string;
 
-    description?: string;
-
-    priority?: "HIGH" | "LOW" | "MEDIUM";
-
-    completed: boolean;
-
-    dueDate?: string;
-
-    createdAt: Date;
-
-    updatedAt: Date;
+    username: string;
 }
 
-const useProjects = () => {
+const useUserProfile = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<null | string>(null);
-    const [data, setData] = useState<Project[]>();
+    const [data, setData] = useState<User>();
 
     useEffect(() => {
         const controller = new AbortController();
         setError(null);
         setLoading(true);
         apiClient
-            .get<Project[]>("/project/")
+            .get<User>("/user")
             .then((res) => {
                 setData(res.data);
             })
             .catch((err) => {
                 setError(err.message);
-                console.log(err);
             })
-            .finally(() => {
-                setLoading(false);
-            });
+            .finally(() => setLoading(false));
         return () => controller.abort();
     }, []);
 
     return { data, loading, error };
 };
 
-export default useProjects;
+export default useUserProfile;

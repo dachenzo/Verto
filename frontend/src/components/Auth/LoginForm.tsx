@@ -25,7 +25,7 @@ const LoginForm = () => {
             onSubmit={handleSubmit(submit)}
         >
             {loading ? (
-                <Spinner></Spinner>
+                <Spinner height="200px" width=""></Spinner>
             ) : (
                 <>
                     {error && (

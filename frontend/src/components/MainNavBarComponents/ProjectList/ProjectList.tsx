@@ -1,15 +1,20 @@
 import styles from "./ProjectList.module.css";
 import sharedStyles from "../SharedStyles.module.css";
 import NavProjectItem from "../NavProjectItem/NavProjectItem";
+import { Project } from "../../../customHooks/useProjects";
 
-const ProjectList = () => {
+interface Props {
+    projects: Project[] | undefined;
+}
+
+const ProjectList = ({ projects }: Props) => {
     return (
         <div className={sharedStyles.navSection}>
             <div className={sharedStyles.title}>Projects</div>
             <div className={styles.ProjectList}>
-                <NavProjectItem></NavProjectItem>
-                <NavProjectItem></NavProjectItem>
-                <NavProjectItem></NavProjectItem>
+                {projects?.map((project) => (
+                    <NavProjectItem project={project}></NavProjectItem>
+                ))}
             </div>
         </div>
     );

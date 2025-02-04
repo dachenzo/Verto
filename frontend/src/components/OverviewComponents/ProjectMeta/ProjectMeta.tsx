@@ -1,6 +1,20 @@
 import styles from "./Projectmeta.module.css";
 
-const ProjectMeta = () => {
+interface Props {
+    dueDate: string | undefined;
+}
+
+const ProjectMeta = ({ dueDate }: Props) => {
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
+    };
+    const formattedDate = dueDate ? formatDate(dueDate) : "N/A"; // Fal
+
     return (
         <div className={styles.projectMeta}>
             <div className={styles.teamAvatars}>
@@ -29,7 +43,7 @@ const ProjectMeta = () => {
                     <line x1="8" y1="2" x2="8" y2="6"></line>
                     <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
-                Due Jan 20
+                {formattedDate}
             </div>
         </div>
     );

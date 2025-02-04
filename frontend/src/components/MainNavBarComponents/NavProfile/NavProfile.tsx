@@ -1,12 +1,14 @@
+import useUserProfile from "../../../customHooks/useUserProfile";
 import styles from "./NavProfile.module.css";
 
 const NavProfile = () => {
+    const { data } = useUserProfile();
     return (
         <div className={styles.userProfile}>
             <div className={styles.userAvatar}></div>
             <div className={styles.userInfo}>
-                <div className={styles.userName}>John Doe</div>
-                <div className={styles.userEmail}>john@example.com</div>
+                <div className={styles.userName}>{data?.username}</div>
+                {/* <div className={styles.userEmail}>{data?.email}</div> */}
             </div>
             <button className={styles.settingsButton}>
                 <svg

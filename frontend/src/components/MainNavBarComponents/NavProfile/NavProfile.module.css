@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem;
+
     border-top: 1px solid #eee;
     margin-top: 2rem;
     padding-top: 1rem;
@@ -17,7 +17,8 @@
 }
 
 .userInfo {
-    flex: 1;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .userName {
