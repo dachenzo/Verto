@@ -9,7 +9,6 @@ interface Props {
     data: Project[] | undefined;
 }
 const Overview = ({ data }: Props) => {
-    console.log(data);
     return (
         <div className={styles.mainContent}>
             <OverviewHeader></OverviewHeader>
@@ -18,9 +17,11 @@ const Overview = ({ data }: Props) => {
             <ProjectsGrid>
                 {data?.map((project) => (
                     <ProjectCard
+                        projectId={project.projectId}
                         title={project.title}
                         completed={project.completed}
                         dueDate={project.dueDate}
+                        key={project.projectId}
                     ></ProjectCard>
                 ))}
             </ProjectsGrid>

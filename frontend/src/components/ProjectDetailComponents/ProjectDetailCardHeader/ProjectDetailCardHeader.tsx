@@ -1,16 +1,13 @@
+import { useSelectedProject } from "../../../contexts/ProjectContext";
 import ProgressBar from "../../ProgressBar/ProgressBar";
 import styles from "./ProjectDetailCardHeader.module.css";
 
 const ProjectDetailCardHeader = () => {
+    const { selectedProject } = useSelectedProject();
     return (
         <div className={styles.card}>
-            <h2 className={styles.cardTitle}>Project Overview</h2>
-            <p>
-                Complete redesign of the company website with a focus on
-                improving user experience and conversion rates. The new design
-                will be modern, responsive, and aligned with our updated brand
-                guidelines.
-            </p>
+            <h2 className={styles.cardTitle}>{selectedProject?.title}</h2>
+            <p>{selectedProject?.description}</p>
 
             <div className={styles.progressSection}>
                 <ProgressBar></ProgressBar>

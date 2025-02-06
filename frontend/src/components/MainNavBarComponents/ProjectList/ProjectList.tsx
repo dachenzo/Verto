@@ -13,7 +13,10 @@ const ProjectList = ({ projects }: Props) => {
             <div className={sharedStyles.title}>Projects</div>
             <div className={styles.ProjectList}>
                 {projects?.map((project) => (
-                    <NavProjectItem project={project}></NavProjectItem>
+                    <NavProjectItem
+                        key={project.projectId}
+                        project={project}
+                    ></NavProjectItem>
                 ))}
             </div>
         </div>

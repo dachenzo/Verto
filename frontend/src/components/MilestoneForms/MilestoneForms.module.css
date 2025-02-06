@@ -1,0 +1,47 @@
+.milestoneItem {
+    padding: 8px;
+    border-radius: 4px;
+    margin: 4px 0;
+    background: white;
+    border: 1px dashed #ccc;
+}
+
+.insertionPoint {
+    background: #e8f0fe;
+    border: 2px dashed #2563eb;
+    color: #2563eb;
+    text-align: center;
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.positionPreview {
+    margin-top: 8px;
+}
+
+.milestonePreview {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #e0e0e0;
+}
+
+.helperText {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+}
+
+.select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}

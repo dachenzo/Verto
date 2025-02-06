@@ -22,9 +22,9 @@ export class MilestoneService {
         @InjectRepository(Project) private projectRepo: Repository<Project>,
     ) {}
 
-    async createMilestone(milestone: CreateMilestoneDto, projectId: number) {
+    async createMilestone(milestone: CreateMilestoneDto) {
         const project = await this.projectRepo.findOne({
-            where: { projectId },
+            where: { projectId: milestone.projectId },
             relations: ['projectUsers', 'projectUsers.user'],
         });
 
@@ -57,11 +57,7 @@ export class MilestoneService {
         return await this.milestoneRepo.save(newMilestone);
     }
 
-    async updateMilestone(
-        milestone: UpdateMilestoneDto,
-        milestoneId: number,
-        projectId: number,
-    ) {
+    async updateMilestone(milestone: UpdateMilestoneDto, milestoneId: number) {
         const oldMilestone = await this.milestoneRepo.findOne({
             where: {
                 milestoneId: milestoneId,

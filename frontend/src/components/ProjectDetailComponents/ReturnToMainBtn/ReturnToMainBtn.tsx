@@ -1,8 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./ReturntoMainBtn.module.css";
 
 const ReturnToMainBtn = () => {
+    const navigation = useNavigate();
     return (
-        <a href="#" className={styles.backBtn}>
+        <a
+            href="#"
+            className={styles.backBtn}
+            onClick={() => navigation("/main")}
+        >
             <svg
                 width="20"
                 height="20"

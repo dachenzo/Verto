@@ -1,5 +1,6 @@
 import styles from "./ProjectDetailHeader.module.css";
-import sharedStyles from "../../OverviewComponents/sharedStyles.module.css";
+
+import NewMilestoneBtn from "../NewMilestoneBtn/NewMilestoneBtn";
 
 const ProjectDetailHeader = () => {
     return (
@@ -35,21 +36,7 @@ const ProjectDetailHeader = () => {
                     </svg>
                     Edit
                 </button>
-                <button
-                    className={`${sharedStyles.btn} ${sharedStyles.btnPrimary}`}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                    >
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    New Milestone
-                </button>
+                <NewMilestoneBtn></NewMilestoneBtn>
             </div>
         </header>
     );

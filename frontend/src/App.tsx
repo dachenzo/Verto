@@ -6,23 +6,26 @@ import ProjectPage from "./pages/ProjectPage";
 import ProjectDetail from "./components/ProjectDetailComponents/ProjectDetail/ProjectDetail";
 import MilestonePage from "./components/MilestonePageComponents/MilestonePage/MilestonePage";
 import useAuthRefresh from "./customHooks/useAuthRefresh";
+import { SelectedProjectProvider } from "./contexts/ProjectContext";
 
 function App() {
     useAuthRefresh();
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<HomePage />}></Route>
-                <Route path="/main" element={<MainPage />}></Route>
-                <Route path="/project/:projectId" element={<ProjectPage />}>
-                    <Route path="" element={<ProjectDetail />}></Route>
-                    <Route
-                        path="milestone/:milestoneId"
-                        element={<MilestonePage />}
-                    ></Route>
-                </Route>
-            </Routes>
-        </Router>
+        <SelectedProjectProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/main" element={<MainPage />}></Route>
+                    <Route path="/project/:projectId" element={<ProjectPage />}>
+                        <Route path="" element={<ProjectDetail />}></Route>
+                        <Route
+                            path="milestone/:milestoneId"
+                            element={<MilestonePage />}
+                        ></Route>
+                    </Route>
+                </Routes>
+            </Router>
+        </SelectedProjectProvider>
     );
 }
 

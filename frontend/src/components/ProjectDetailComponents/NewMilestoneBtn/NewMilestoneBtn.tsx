@@ -1,8 +1,8 @@
 import { useState } from "react";
-import sharedStyles from "../sharedStyles.module.css";
-import NewProjectForm from "../../ProjectForms/NewProjectForm";
+import sharedStyles from "../../OverviewComponents/sharedStyles.module.css";
+import NewMilestoneForm from "../../MilestoneForms/NewMilestoneForm";
 
-const NewProjectBtn = () => {
+const NewMilestoneBtn = () => {
     const [isForm, setIsForm] = useState<boolean>(false);
 
     return (
@@ -12,8 +12,7 @@ const NewProjectBtn = () => {
                 onClick={() => setIsForm(true)}
             >
                 <svg
-                    width="20"
-                    height="20"
+                    xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -22,10 +21,12 @@ const NewProjectBtn = () => {
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                New Project
+                New Milestone
             </button>
             {isForm ? (
-                <NewProjectForm closeModal={() => setIsForm(false)} />
+                <NewMilestoneForm
+                    closeModal={() => setIsForm(false)}
+                ></NewMilestoneForm>
             ) : (
                 ""
             )}
@@ -33,4 +34,4 @@ const NewProjectBtn = () => {
     );
 };
 
-export default NewProjectBtn;
+export default NewMilestoneBtn;

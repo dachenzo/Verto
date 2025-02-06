@@ -21,5 +21,8 @@ export class UpdateMilestoneDto {
     dueDate: Date;
 
     @IsNotEmpty()
+    projectId: number;
+
+    @IsNotEmpty()
     userId: number;
 }

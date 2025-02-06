@@ -39,7 +39,7 @@ export class Milestone {
     @OneToMany(() => Task, (task) => task.milestone, { cascade: true })
     tasks: Task[];
 
-    @ManyToOne(() => Project, (project) => project.milestone, {
+    @ManyToOne(() => Project, (project) => project.milestones, {
         onDelete: 'CASCADE',
     })
     project: Project;

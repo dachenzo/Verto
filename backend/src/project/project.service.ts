@@ -96,7 +96,12 @@ export class ProjectService {
     async getProjectByid(projectId: number, userId: number) {
         const project = await this.projectRepo.findOne({
             where: { projectId },
-            relations: ['projectUsers', 'projectUsers.user'],
+            relations: [
+                'projectUsers',
+                'projectUsers.user',
+                'milestones',
+                'milestones.tasks',
+            ],
         });
 
         if (!project) {
