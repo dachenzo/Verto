@@ -1,4 +1,5 @@
 import { Expose } from 'class-transformer';
+import { Milestone } from 'src/milestone/milestone.entity';
 import { Task } from 'src/tasks/task.entity';
 
 export class ProjectSerializerDto {
@@ -21,7 +22,7 @@ export class ProjectSerializerDto {
     createdAt: Date;
 
     @Expose()
-    tasks: Task[];
+    milestones: Milestone[];
 
     @Expose()
     priority: 'HIGH' | 'LOW' | 'MEDIUM';

@@ -1,20 +1,21 @@
+import { useSelectedProject } from "../../../contexts/ProjectContext";
 import ProjectDetailMilestone from "../ProjectDetailMilestone/ProjectDetailMilestone";
 import styles from "./ProjectDetailMilestoneList.module.css";
 
 const ProjectDetailMilestoneList = () => {
+    const { selectedProject } = useSelectedProject();
     return (
         <div className={styles.milestoneList}>
-            <ProjectDetailMilestone isCompleted={true}></ProjectDetailMilestone>
-            <ProjectDetailMilestone isCompleted={true}></ProjectDetailMilestone>
-            <ProjectDetailMilestone
-                isCompleted={false}
-            ></ProjectDetailMilestone>
-            <ProjectDetailMilestone
-                isCompleted={false}
-            ></ProjectDetailMilestone>
-            <ProjectDetailMilestone
-                isCompleted={false}
-            ></ProjectDetailMilestone>
+            {selectedProject?.milestones
+                ? selectedProject.milestones.map((milestone, index) => (
+                      <ProjectDetailMilestone
+                          isCompleted={milestone.completed}
+                          title={milestone.title}
+                          description={milestone.description}
+                          key={index}
+                      ></ProjectDetailMilestone>
+                  ))
+                : ""}
         </div>
     );
 };

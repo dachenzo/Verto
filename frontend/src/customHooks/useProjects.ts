@@ -3,15 +3,41 @@ import apiClient from "../services/apiClient";
 
 export interface Task {
     taskId: number;
+
     title: string;
+
     description: string;
+
+    type: "CALENDAR" | "DEADLINE";
+
+    priority: "HIGH" | "LOW" | "MEDIUM";
+
+    deadline: Date;
+
+    startTime: Date;
+
+    endTime: Date;
+
+    status: "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 }
 
 export interface Milestone {
     milestoneId: number;
+
     title: string;
-    description?: string;
+
+    description: string;
+
+    completed: boolean;
+
+    dueDate: Date;
+
     orderIndex: number;
+
+    createdAt: Date;
+
+    updatedAt: Date;
+
     tasks: Task[];
 }
 

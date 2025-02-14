@@ -40,7 +40,9 @@ export class AuthController {
 
             return { userId: payload.sub, email: payload.email };
         } catch (err) {
-            throw new UnauthorizedException('Invalid or Expired Token');
+            throw new UnauthorizedException(
+                ' I am the error Invalid or Expired Token',
+            );
         }
     }
 
@@ -61,11 +63,13 @@ export class AuthController {
             user,
         );
 
+        console.log(`Login Access Token: ${accessToken}`);
+
         response.cookie('accessToken', accessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000,
+            maxAge: 5 * 60 * 1000,
         });
 
         response.cookie('refreshToken', refreshToken, {
@@ -108,6 +112,7 @@ export class AuthController {
         @Body() body: UserRegisterDto,
         @Res({ passthrough: true }) response: Response,
     ) {
+        console.log('I got to controller');
         const { accessToken, refreshToken } = await this.authService.register(
             body.username,
             body.email,
@@ -118,7 +123,7 @@ export class AuthController {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000,
+            maxAge: 7 * 60 * 1000,
         });
 
         response.cookie('refreshToken', refreshToken, {
@@ -131,7 +136,6 @@ export class AuthController {
         return { message: 'Login_successfully' };
     }
 
-    @Public()
     @Post('/refresh')
     async refreshToken(
         @Req() request: Request,
@@ -141,17 +145,26 @@ export class AuthController {
         const { accessToken, refreshToken } =
             await this.authService.refreshToken(oldRefreshToken);
 
+        response.setHeader(
+            'Cache-Control',
+            'no-store, no-cache, must-revalidate, proxy-revalidate',
+        );
+        response.setHeader('Pragma', 'no-cache');
+        response.setHeader('Expires', '0');
+
         response.cookie('accessToken', accessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000,
+            maxAge: 7 * 60 * 1000,
+            path: '/',
         });
 
         response.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
+            path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 

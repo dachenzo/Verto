@@ -39,6 +39,7 @@ export const SelectedProjectProvider = ({
                 setError(err.message);
             })
             .finally(() => setLoading(false));
+        console.log(selectedProject);
     };
 
     return (

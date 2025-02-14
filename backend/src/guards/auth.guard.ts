@@ -35,7 +35,9 @@ export class AuthGuard implements CanActivate {
         // console.log('Token: ', token);
 
         if (!token) {
-            throw new UnauthorizedException('Authorization Token not found');
+            throw new UnauthorizedException(
+                'GuardError: Authorization Token not found',
+            );
         }
 
         try {
@@ -46,12 +48,15 @@ export class AuthGuard implements CanActivate {
             request.user = payload;
             return true;
         } catch (err) {
-            throw new UnauthorizedException('Invalid or expired token');
+            throw new UnauthorizedException(
+                'GuardError: Invalid or expired token',
+            );
         }
     }
 
     extractTokenFromCookie(request: Request) {
         const accessToken = request.cookies.accessToken;
+        // console.log(`accessToken: ${accessToken}`);
         return accessToken;
     }
 }

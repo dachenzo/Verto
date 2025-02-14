@@ -17,7 +17,7 @@ import { ProjectSerializerDto } from './dtos/serializer.dto';
 
 @Controller('project')
 @UseInterceptors(InsertUserInterceptor)
-@Serializer(ProjectSerializerDto)
+// @Serializer(ProjectSerializerDto)
 export class ProjectController {
     constructor(private projectService: ProjectService) {}
 
@@ -27,11 +27,16 @@ export class ProjectController {
     }
 
     @Get('/:id')
-    getProjectById(
+    async getProjectById(
         @Param('id') projectId: number,
         @Body() body: { userId: number },
     ) {
-        return this.projectService.getProjectByid(projectId, body.userId);
+        const project = await this.projectService.getProjectByid(
+            projectId,
+            body.userId,
+        );
+
+        return project;
     }
 
     @Post()

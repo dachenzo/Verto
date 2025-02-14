@@ -26,29 +26,69 @@ const NewMilestoneForm = ({ closeModal }: Props) => {
     const { error, loading, submit } =
         useFormsSubmit<MilestoneFormData>("/milestone");
 
-    const { selectedProject } = useSelectedProject();
-
+    const { selectedProject, loadProjectDetails } = useSelectedProject();
+    console.log(selectedProject?.milestones);
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<MilestoneFormData>();
 
-    const help = (data?: any) => {
-        submit(data);
-        closeModal();
-    };
-
-    const [milestones, setMilestones] = useState([
-        { id: 1, title: "Setup Project Infrastructure" },
-        { id: 2, title: "Design User Interface" },
-        { id: 3, title: "Implement Core Features" },
-        { id: 4, title: "Launch Version 1.0" },
-    ]);
-
     const [placeholderAfter, setPlaceholderAfter] = useState<number | null>(
         null
     ); // null means "at the beginning"
+
+    const formSubmit = async (data?: any) => {
+        const extractOrderIndex = (placeholderAfter: number | null) => {
+            if (placeholderAfter === null) {
+                if (
+                    selectedProject?.milestones &&
+                    selectedProject.milestones.length > 0
+                ) {
+                    // Inserting at the beginning: subtract 1 from the first milestone's index
+                    return Number(selectedProject.milestones[0].orderIndex) - 1;
+                }
+                return 1;
+            } else {
+                if (selectedProject?.milestones !== undefined) {
+                    const n = selectedProject.milestones.length;
+                    if (placeholderAfter === n - 1) {
+                        // Inserting after the last milestone: add 1 to the last milestone's index
+                        return (
+                            Number(
+                                selectedProject.milestones[n - 1].orderIndex
+                            ) + 1
+                        );
+                    } else {
+                        // Inserting between milestones: take the average
+                        return (
+                            (Number(
+                                selectedProject.milestones[placeholderAfter]
+                                    .orderIndex
+                            ) +
+                                Number(
+                                    selectedProject.milestones[
+                                        placeholderAfter + 1
+                                    ].orderIndex
+                                )) /
+                            2
+                        );
+                    }
+                }
+            }
+        };
+
+        const orderIndex = extractOrderIndex(placeholderAfter);
+        console.log(orderIndex);
+        const finalData = {
+            projectId: selectedProject?.projectId,
+            ...data,
+            orderIndex,
+        };
+        await submit(finalData);
+        await loadProjectDetails(selectedProject?.projectId as number);
+        closeModal();
+    };
 
     const handlePositionChange = (
         event: React.ChangeEvent<HTMLSelectElement>
@@ -57,10 +97,8 @@ const NewMilestoneForm = ({ closeModal }: Props) => {
 
         if (value === "start") {
             setPlaceholderAfter(null); // Place at the start
-        } else if (value === "end") {
-            setPlaceholderAfter(milestones[milestones.length - 1].id); // Place at the end
         } else {
-            const id = parseInt(value.replace("After ", ""), 10); // Extract the ID from the option
+            const id = parseInt(value, 10); // Extract the ID from the option
             setPlaceholderAfter(id); // Place after the selected milestone
         }
     };
@@ -72,7 +110,7 @@ const NewMilestoneForm = ({ closeModal }: Props) => {
             ) : (
                 <form
                     className={sharedFormStyles.formCard}
-                    onSubmit={handleSubmit(help)}
+                    onSubmit={handleSubmit(formSubmit)}
                 >
                     {error && <p className={sharedFormStyles.e}>{error}</p>}
                     <div className={sharedFormStyles.formSection}>
@@ -118,51 +156,64 @@ const NewMilestoneForm = ({ closeModal }: Props) => {
                                 Position
                             </label>
                             <select
-                                {...register("orderIndex", {
-                                    required: "Insertion Point is required",
-                                })}
+                                required
                                 className={styles.select}
                                 onChange={handlePositionChange}
+                                defaultValue={""}
                             >
-                                <option value="" disabled selected>
+                                <option value="" disabled>
                                     Select position
                                 </option>
                                 <option value="start">At the beginning</option>
-                                {milestones.map((milestone) => (
-                                    <option
-                                        key={milestone.id}
-                                        value={`After ${milestone.id}`}
-                                    >
-                                        {`After ${milestone.title}`}
-                                    </option>
-                                ))}
-                                <option value="end">At the end</option>
+                                {selectedProject?.milestones
+                                    ? selectedProject.milestones.map(
+                                          (milestone, index) => (
+                                              <option key={index} value={index}>
+                                                  {`After ${milestone.title}`}
+                                              </option>
+                                          )
+                                      )
+                                    : ""}
                             </select>
 
                             <div className={styles.positionPreview}>
                                 <div className={styles.milestonePreview}>
-                                    {milestones.map((milestone) => (
-                                        <>
-                                            <div
-                                                className={styles.milestoneItem}
-                                            >
-                                                {milestone.title}
-                                            </div>
-                                            {placeholderAfter ===
-                                            milestone.id ? (
-                                                <div
-                                                    className={
-                                                        styles.insertionPoint
-                                                    }
-                                                >
-                                                    New Milestone Will Be Added
-                                                    Here
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-                                        </>
-                                    ))}
+                                    {placeholderAfter === null ? (
+                                        <div className={styles.insertionPoint}>
+                                            New Milestone Will Be Added Here
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
+                                    {selectedProject?.milestones
+                                        ? selectedProject.milestones.map(
+                                              (milestone, index) => (
+                                                  <>
+                                                      <div
+                                                          className={
+                                                              styles.milestoneItem
+                                                          }
+                                                      >
+                                                          {milestone.title}
+                                                      </div>
+
+                                                      {placeholderAfter ===
+                                                      index ? (
+                                                          <div
+                                                              className={
+                                                                  styles.insertionPoint
+                                                              }
+                                                          >
+                                                              New Milestone Will
+                                                              Be Added Here
+                                                          </div>
+                                                      ) : (
+                                                          ""
+                                                      )}
+                                                  </>
+                                              )
+                                          )
+                                        : ""}
                                 </div>
                             </div>
                             <p className={styles.helperText}>

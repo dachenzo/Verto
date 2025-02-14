@@ -2,8 +2,10 @@ import styles from "./ProjectDetailMilestone.module.css";
 
 interface Props {
     isCompleted: boolean;
+    title: string;
+    description: string;
 }
-const ProjectDetailMilestone = ({ isCompleted }: Props) => {
+const ProjectDetailMilestone = ({ isCompleted, title, description }: Props) => {
     return (
         <div className={styles.milestone}>
             <div
@@ -12,8 +14,8 @@ const ProjectDetailMilestone = ({ isCompleted }: Props) => {
                 }`}
             ></div>
             <div className={styles.milestoneContent}>
-                <h3>Research & Planning</h3>
-                <p>User research, competitor analysis, and site architecture</p>
+                <h3>{title}</h3>
+                <p>{description}</p>
             </div>
         </div>
     );

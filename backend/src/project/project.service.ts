@@ -94,15 +94,15 @@ export class ProjectService {
     }
 
     async getProjectByid(projectId: number, userId: number) {
-        const project = await this.projectRepo.findOne({
-            where: { projectId },
-            relations: [
-                'projectUsers',
-                'projectUsers.user',
-                'milestones',
-                'milestones.tasks',
-            ],
-        });
+        const project = await this.projectRepo
+            .createQueryBuilder('project')
+            .leftJoinAndSelect('project.projectUsers', 'projectUser')
+            .leftJoinAndSelect('projectUser.user', 'user')
+            .leftJoinAndSelect('project.milestones', 'milestone')
+            .leftJoinAndSelect('milestone.tasks', 'task')
+            .where('project.projectId = :projectId', { projectId })
+            .orderBy('milestone.orderIndex', 'ASC') // Sorting milestones by orderIndex
+            .getOne();
 
         if (!project) {
             throw new NotFoundException('Project not Found');

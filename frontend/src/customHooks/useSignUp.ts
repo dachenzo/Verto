@@ -27,7 +27,7 @@ const useSignUp = () => {
             })
             .catch((err) => {
                 setError(err);
-                console.log(err);
+                console.log(err.message);
                 setLoading(false);
             });
     };

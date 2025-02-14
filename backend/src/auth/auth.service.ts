@@ -3,12 +3,14 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/user/user.entity';
+import { JwtRedisService } from 'src/redis/jwt-redis.service';
 
 @Injectable()
 export class AuthService {
     constructor(
         private jwtservice: JwtService,
         private userService: UserService,
+        private jwtRedisService: JwtRedisService,
     ) {}
 
     async validateUser(email: string, password: string) {
@@ -23,7 +25,7 @@ export class AuthService {
     //TODO: remove any from login parametyer tpye
     async login(userId: number, email: string, user: User) {
         const payload = { sub: userId, email: email };
-        const accessToken = this.jwtservice.sign(payload, { expiresIn: '15m' });
+        const accessToken = this.jwtservice.sign(payload, { expiresIn: '5m' });
         const refreshToken = this.jwtservice.sign(payload, { expiresIn: '7d' });
         const salt = await bcrypt.genSalt();
         const hashedRefreshToken = await bcrypt.hash(refreshToken, salt);
@@ -38,25 +40,33 @@ export class AuthService {
     }
 
     async refreshToken(token: string) {
-        const payload = this.jwtservice.verify(token);
+        const payload = this.jwtservice.verify(token, {
+            secret: process.env.JWT_SECRET_KEY,
+        });
+
         const user = await this.userService.getUserById(payload.sub);
-        const { exp, newPayload } = payload;
+        const { exp, iat, ...newPayload } = payload;
 
         if (!user) {
-            throw new UnauthorizedException('Invalid User');
+            throw new UnauthorizedException('Service error: Invalid User');
         }
 
         const isValid = await bcrypt.compare(token, user.refreshToken);
         if (!isValid) {
-            throw new UnauthorizedException('Invalid refresh token');
+            throw new UnauthorizedException(
+                'Service error: Invalid refresh token',
+            );
         }
 
+        await this.jwtRedisService.blackListToken(token, exp);
+
         const newAccessToken = this.jwtservice.sign(newPayload, {
-            expiresIn: '15m',
+            expiresIn: '5m',
         });
         const newRefreshToken = this.jwtservice.sign(newPayload, {
             expiresIn: '7d',
         });
+
         const salt = await bcrypt.genSalt();
         const hashedRefreshToken = await bcrypt.hash(newRefreshToken, salt);
 
