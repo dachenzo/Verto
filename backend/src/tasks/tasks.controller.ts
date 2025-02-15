@@ -30,10 +30,10 @@ export class TasksController {
         return this.taskService.getTaskById(taskId, body.userId);
     }
 
-    // @Post()
-    // createTask(@Body() body: CreateTaskDto) {
-    //     return this.taskService.createTask(body);
-    // }
+    @Post()
+    createTask(@Body() body: CreateTaskDto) {
+        return this.taskService.createTask(body);
+    }
 
     // @Patch('/:id')
     // updateTask(@Body() body: UpdateTaskDto, @Param('id') taskId: number) {

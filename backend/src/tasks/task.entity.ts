@@ -30,6 +30,9 @@ export class Task {
     @Column({ nullable: true })
     endTime: Date;
 
+    @Column({ default: false })
+    completed: boolean;
+
     @Column({ default: 'NOT_STARTED' })
     status: 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED';
 

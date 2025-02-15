@@ -1,10 +1,24 @@
+import { useState } from "react";
+import { useSelectedProject } from "../../../contexts/ProjectContext";
 import NavMilestone from "../NavMilestoneItem/NavMilestone";
 import styles from "./NavMilestoneList.module.css";
+import { useNavigate } from "react-router-dom";
 
 const NavMilestoneList = () => {
+    const { selectedProject } = useSelectedProject();
+    const [isActive, setIsActive] = useState<number | null>(null);
+    const navigate = useNavigate();
+    const handleOverviewClick = () => {
+        setIsActive(null);
+        navigate(`/project/${selectedProject?.projectId}`);
+    };
     return (
         <div className={styles.navTabs}>
-            <a href="#" className={`${styles.navTab} ${styles.active}`}>
+            <a
+                href="#"
+                className={`${styles.navTab} ${styles.active}`}
+                onClick={handleOverviewClick}
+            >
                 <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -18,16 +32,19 @@ const NavMilestoneList = () => {
             </a>
 
             <div className={styles.navSectionTitle}>Milestones</div>
-            <NavMilestone
-                name={"Design and Planning"}
-                completed={true}
-            ></NavMilestone>
-            <NavMilestone name={"Frontend "} completed={true}></NavMilestone>
-            <NavMilestone name={"Backend"} completed={false}></NavMilestone>
-            <NavMilestone
-                name={"Testing Deployment"}
-                completed={false}
-            ></NavMilestone>
+            {selectedProject?.milestones
+                ? selectedProject.milestones.map((milestone, index) => (
+                      <NavMilestone
+                          key={index}
+                          name={milestone.title}
+                          completed={milestone.completed}
+                          isActive={isActive}
+                          setIsActive={setIsActive}
+                          milestoneId={milestone.milestoneId}
+                          projectId={selectedProject.projectId}
+                      ></NavMilestone>
+                  ))
+                : ""}
         </div>
     );
 };

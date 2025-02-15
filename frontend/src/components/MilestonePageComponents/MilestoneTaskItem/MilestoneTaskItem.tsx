@@ -1,22 +1,29 @@
 import styles from "./MilestoneTaskItem.module.css";
 
-const MilestoneTaskItem = () => {
+interface Props {
+    title: string;
+    description: string;
+    isCompleted: boolean;
+    date: Date;
+}
+const MilestoneTaskItem = ({
+    title,
+    description,
+    isCompleted,
+    date,
+}: Props) => {
     return (
         <div className={styles.taskItem}>
             <div className={styles.taskContent}>
                 <div className={styles.taskTitle}>
-                    Design system documentation
+                    {title}
                     <span
                         className={`${styles.taskStatus} ${styles.inProgress}`}
                     >
-                        In Progress
+                        {!isCompleted ? "In Progress" : "Done"}
                     </span>
                 </div>
-                <div className={styles.taskDescription}>
-                    Create comprehensive documentation for the new design system
-                    including color palette, typography, and component
-                    guidelines.
-                </div>
+                <div className={styles.taskDescription}>{description}</div>
                 <div className={styles.taskMeta}>
                     <div className={styles.taskDue}>
                         <svg
@@ -39,7 +46,7 @@ const MilestoneTaskItem = () => {
                             <line x1="8" y1="2" x2="8" y2="6"></line>
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
-                        Feb 5, 2025
+                        {date.toString()}
                     </div>
                 </div>
             </div>

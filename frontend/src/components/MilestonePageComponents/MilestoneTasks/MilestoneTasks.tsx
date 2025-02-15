@@ -2,15 +2,29 @@ import GenericWhiteCard from "../../GenericWhiteCard/GenericWhiteCard";
 import styles from "./MilestoneTasks.module.css";
 import sharedStyles from "../../OverviewComponents/sharedStyles.module.css";
 import MilestoneTaskList from "../MilestoneTaskList/MilestoneTaskList";
+import { useState } from "react";
+import NewTaskForm from "../../TaskForms/NewTaskForm";
 const MilestoneTasks = () => {
+    const [isForm, setIsForm] = useState<boolean>(false);
+    const handleNewTaskBtn = () => {
+        setIsForm(true);
+    };
     return (
         <>
             <GenericWhiteCard>
                 <div className={styles.height}>
                     <div className={styles.tasksHeader}>
                         <h2 className={styles.headerTitle}>Tasks</h2>
+                        {isForm ? (
+                            <NewTaskForm
+                                setIsNewTaskForm={setIsForm}
+                            ></NewTaskForm>
+                        ) : (
+                            ""
+                        )}
                         <button
                             className={`${sharedStyles.btn} ${sharedStyles.btnPrimary}`}
+                            onClick={handleNewTaskBtn}
                         >
                             <svg
                                 width="20"

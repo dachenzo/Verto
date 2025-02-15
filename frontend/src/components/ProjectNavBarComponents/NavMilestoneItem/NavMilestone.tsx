@@ -1,13 +1,36 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./NavMilestone.module.css";
 
 interface Props {
     name: string;
     completed: boolean;
+    isActive: number | null;
+    setIsActive: (x: number) => void;
+    milestoneId: number;
+    projectId: number;
 }
 
-const NavMilestone = ({ name, completed }: Props) => {
+const NavMilestone = ({
+    name,
+    completed,
+    isActive,
+    setIsActive,
+    milestoneId,
+    projectId,
+}: Props) => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/project/${projectId}/milestone/${milestoneId}`);
+        setIsActive(milestoneId);
+    };
     return (
-        <a href="#" className={`${styles.navTab} ${styles.active}`}>
+        <a
+            href="#"
+            className={`${styles.navTab} ${
+                isActive === milestoneId ? styles.active : ""
+            }`}
+            onClick={handleClick}
+        >
             {completed ? (
                 <svg
                     viewBox="0 0 24 24"

@@ -1,5 +1,4 @@
 import {
-    BadRequestException,
     ForbiddenException,
     Injectable,
     NotFoundException,
@@ -21,9 +20,9 @@ export class TasksService {
         @InjectRepository(Milestone)
         private milestoneRepo: Repository<Milestone>,
     ) {}
-    async createTask(milestoneId: number, task: CreateTaskDto) {
+    async createTask(task: CreateTaskDto) {
         const milestone = await this.milestoneRepo.findOne({
-            where: { milestoneId },
+            where: { milestoneId: task.milestoneId },
             relations: [
                 'project',
                 'project.projectUsers',
@@ -46,7 +45,11 @@ export class TasksService {
         }
 
         const { userId, ...taskDetails } = task;
-        const newTask = this.taskRepo.create({ ...taskDetails, milestone });
+        const newTask = this.taskRepo.create({
+            ...taskDetails,
+            milestone,
+            project: milestone.project,
+        });
 
         return await this.taskRepo.save(newTask);
     }

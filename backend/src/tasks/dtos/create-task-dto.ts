@@ -61,4 +61,7 @@ export class CreateTaskDto {
 
     @IsNotEmpty()
     userId: number;
+
+    @IsNotEmpty()
+    milestoneId: number;
 }

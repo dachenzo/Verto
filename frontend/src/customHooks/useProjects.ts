@@ -16,6 +16,8 @@ export interface Task {
 
     startTime: Date;
 
+    completed: boolean;
+
     endTime: Date;
 
     status: "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
