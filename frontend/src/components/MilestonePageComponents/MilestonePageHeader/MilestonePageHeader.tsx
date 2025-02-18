@@ -1,12 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import ProgressBar from "../../ProgressBar/ProgressBar";
 import styles from "./MilestonePageHeader.module.css";
 import EditMilestoneBtn from "../EditMilestoneBtn/EditMilestoneBtn";
+import DeleteBtn from "../../DeleteBtn/DeleteBtn";
+import CompleteBtn from "../../CompleteMilestoneBtn/CompleteMilestoneBtn";
 
 const MilestonePageHeader = () => {
-    const { milestoneId } = useParams();
-    const { selectedProject } = useSelectedProject();
+    const { milestoneId, projectId } = useParams();
+    const { selectedProject, loadProjectDetails } = useSelectedProject();
+    const navigate = useNavigate();
+    const onDeleteSuccess = async () => {
+        await loadProjectDetails(parseInt(projectId as string));
+        await navigate(`/project/${projectId}`);
+        return;
+    };
     const milestone =
         selectedProject?.milestones && milestoneId
             ? selectedProject.milestones.find(
@@ -17,7 +25,16 @@ const MilestonePageHeader = () => {
         <div className={styles.milestoneHeader}>
             <div className={styles.placeholder}>
                 <div className={styles.milestoneTitle}>{milestone?.title}</div>
-                <EditMilestoneBtn></EditMilestoneBtn>
+                <div className={styles.utilBtns}>
+                    <CompleteBtn
+                        isComplete={milestone?.completed as boolean}
+                    ></CompleteBtn>
+                    <EditMilestoneBtn></EditMilestoneBtn>
+                    <DeleteBtn
+                        url={`milestone/${milestoneId}`}
+                        onSuccess={onDeleteSuccess}
+                    ></DeleteBtn>
+                </div>
             </div>
             <ProgressBar></ProgressBar>
             <div className={styles.milestoneMeta}>

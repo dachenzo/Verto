@@ -12,6 +12,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+    margin: 0px 10px;
 }
 
 .editButton:hover {

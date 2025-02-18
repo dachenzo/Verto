@@ -1,0 +1,94 @@
+.milestoneButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pulsing animation - only triggered on hover/active */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(76, 175, 80, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+}
+
+.milestoneButton:hover {
+    background-color: #43a047;
+    transform: translateY(-2px);
+    animation: pulse 1.5s infinite;
+}
+
+.milestoneButton:active {
+    transform: translateY(0);
+    animation: pulse 0.8s infinite;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Success state */
+.milestoneButton.completed {
+    background-color: #388e3c;
+    animation: none;
+    transform: translateY(0);
+}
+
+.milestoneButton.completed .icon {
+    animation: checkmark 0.5s ease-in-out forwards;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Shine effect on hover */
+.milestoneButton::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.milestoneButton:hover::after {
+    transform: rotate(45deg) translate(50%, 50%);
+}

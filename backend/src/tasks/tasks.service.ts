@@ -11,6 +11,7 @@ import { CreateTaskDto } from './dtos/create-task-dto';
 import { UserService } from 'src/user/user.service';
 import { Milestone } from 'src/milestone/milestone.entity';
 import { ProjectRole } from 'src/project/projectuser.entity';
+import { UpdateTaskDto } from './dtos/update-task-dto';
 
 @Injectable()
 export class TasksService {
@@ -93,6 +94,38 @@ export class TasksService {
             .andWhere('joinedUser.userId = :userId', { userId: userId })
             .getMany();
         return tasks;
+    }
+
+    async updateTask(taskId: number, task: UpdateTaskDto) {
+        const oldTask = await this.taskRepo.findOne({
+            where: { taskId },
+            relations: [
+                'milestone',
+                'milestone.project',
+                'milestone.project.projectUsers',
+                'milestone.project.projectUsers.user',
+            ],
+        });
+
+        if (!task) {
+            throw new NotFoundException('Task not Found');
+        }
+
+        const projectUser = oldTask.milestone.project.projectUsers.find(
+            (pu) => pu.user.userId === task.userId,
+        );
+        if (!projectUser) {
+            throw new ForbiddenException(
+                'User is not a member of the project associated with this task',
+            );
+        }
+
+        const { userId, ...taskDetails } = task;
+        Object.assign(oldTask, taskDetails);
+
+        const updatedTask = await this.taskRepo.save(oldTask);
+
+        return updatedTask;
     }
 
     async getTasksByMilestone() {}

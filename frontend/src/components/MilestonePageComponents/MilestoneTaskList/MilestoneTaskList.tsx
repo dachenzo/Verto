@@ -23,6 +23,7 @@ const MilestoneTaskList = () => {
                           isCompleted={ta.completed}
                           date={ta.deadline}
                           key={ta.taskId}
+                          taskId={ta.taskId}
                       />
                   ))
                 : ""}

@@ -24,8 +24,5 @@ export class UpdateMilestoneDto {
     orderIndex: number;
 
     @IsNotEmpty()
-    projectId: number;
-
-    @IsNotEmpty()
     userId: number;
 }

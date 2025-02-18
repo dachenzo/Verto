@@ -1,3 +1,4 @@
+import CompleteTaskBtn from "../../CompleteTaskbtn/CompleteTaskBtn";
 import styles from "./MilestoneTaskItem.module.css";
 
 interface Props {
@@ -5,15 +6,21 @@ interface Props {
     description: string;
     isCompleted: boolean;
     date: Date;
+    taskId: number;
 }
 const MilestoneTaskItem = ({
     title,
     description,
     isCompleted,
     date,
+    taskId,
 }: Props) => {
     return (
         <div className={styles.taskItem}>
+            <CompleteTaskBtn
+                taskId={taskId}
+                isComplete={isCompleted}
+            ></CompleteTaskBtn>
             <div className={styles.taskContent}>
                 <div className={styles.taskTitle}>
                     {title}

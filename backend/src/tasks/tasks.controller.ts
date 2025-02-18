@@ -26,22 +26,29 @@ export class TasksController {
     // }
 
     @Get('/:id')
-    getTaskById(@Param('id') taskId: number, @Body() body: { userId: number }) {
-        return this.taskService.getTaskById(taskId, body.userId);
+    async getTaskById(
+        @Param('id') taskId: number,
+        @Body() body: { userId: number },
+    ) {
+        return await this.taskService.getTaskById(taskId, body.userId);
     }
 
     @Post()
-    createTask(@Body() body: CreateTaskDto) {
-        return this.taskService.createTask(body);
+    async createTask(@Body() body: CreateTaskDto) {
+        return await this.taskService.createTask(body);
     }
 
-    // @Patch('/:id')
-    // updateTask(@Body() body: UpdateTaskDto, @Param('id') taskId: number) {
-    //     return this.taskService.updateTask(body, taskId);
-    // }
+    @Patch('/:id')
+    async updateTask(@Body() body: UpdateTaskDto, @Param('id') taskId: number) {
+        console.log(body);
+        return await this.taskService.updateTask(taskId, body);
+    }
 
     @Delete('/:id')
-    deleteTask(@Param('id') taskId: number, @Body() body: { userId: number }) {
-        return this.taskService.deleteTask(taskId, body.userId);
+    async deleteTask(
+        @Param('id') taskId: number,
+        @Body() body: { userId: number },
+    ) {
+        return await this.taskService.deleteTask(taskId, body.userId);
     }
 }

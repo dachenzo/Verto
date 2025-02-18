@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     Param,
     Patch,
@@ -46,5 +47,14 @@ export class MilestoneController {
         @Param('id') milestoneId: number,
     ) {
         return this.milestoneService.updateMilestone(body, milestoneId);
+    }
+
+    @Delete('/:id')
+    async deleteMilestone(
+        @Param('id') milestoneId: number,
+        @Body() body: { userId: number },
+    ) {
+        await this.milestoneService.deleteMilestone(milestoneId, body.userId);
+        return;
     }
 }

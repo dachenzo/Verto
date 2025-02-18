@@ -107,7 +107,6 @@ const EditMilestoneForm = ({ closeModal }: Props) => {
 
         const orderIndex = extractOrderIndex(placeholderAfter);
         const finalData = {
-            projectId: selectedProject?.projectId,
             ...data,
             orderIndex,
         };

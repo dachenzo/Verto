@@ -1,0 +1,50 @@
+.checkButton {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkButton:hover {
+    border-color: #2196f3;
+    background-color: #f0f7ff;
+}
+
+.checkIcon {
+    width: 14px;
+    height: 14px;
+    stroke: white;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: none;
+}
+
+.checkButton.completed {
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+
+.checkButton.completed .checkIcon {
+    display: block;
+    animation: checkmark 0.2s ease-in-out forwards;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
