@@ -1,20 +1,25 @@
+import { useParams } from "react-router-dom";
+import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import ProgressBar from "../../ProgressBar/ProgressBar";
 import styles from "./MilestonePageHeader.module.css";
+import EditMilestoneBtn from "../EditMilestoneBtn/EditMilestoneBtn";
 
 const MilestonePageHeader = () => {
+    const { milestoneId } = useParams();
+    const { selectedProject } = useSelectedProject();
+    const milestone =
+        selectedProject?.milestones && milestoneId
+            ? selectedProject.milestones.find(
+                  (pu) => pu.milestoneId === parseInt(milestoneId)
+              )
+            : undefined;
     return (
         <div className={styles.milestoneHeader}>
-            <div className={styles.milestoneTitle}>Design Phase</div>
+            <div className={styles.placeholder}>
+                <div className={styles.milestoneTitle}>{milestone?.title}</div>
+                <EditMilestoneBtn></EditMilestoneBtn>
+            </div>
             <ProgressBar></ProgressBar>
-            {/* <div class="progress-section">
-                <div class="progress-header">
-                    <span>Milestone Progress</span>
-                    <span>75%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 75%"></div>
-                </div>
-            </div> */}
             <div className={styles.milestoneMeta}>
                 <div className={styles.metaItem}>
                     <svg
@@ -37,7 +42,7 @@ const MilestonePageHeader = () => {
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    Due: Feb 15, 2025
+                    {`Due: ${milestone?.dueDate}`}
                 </div>
                 <div className={styles.metaItem}>
                     <svg
@@ -46,7 +51,7 @@ const MilestonePageHeader = () => {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="2"
+                        strokeWidth="2"
                     >
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                         <circle cx="9" cy="7" r="4"></circle>

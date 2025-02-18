@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { Project } from "../customHooks/useProjects";
+import { Project } from "../customHooks/interfaces";
 import apiClient from "../services/apiClient";
 
 export interface SelectedProjectContextType {
@@ -28,10 +28,9 @@ export const SelectedProjectProvider = ({
         setError(null);
         setLoading(true);
 
-        apiClient
+        await apiClient
             .get<Project>(`/project/${projectId}`)
             .then((res) => {
-                console.log(` fetched project: ${res.data}`);
                 setSelectedProject(res.data);
             })
             .catch((err) => {
@@ -39,7 +38,6 @@ export const SelectedProjectProvider = ({
                 setError(err.message);
             })
             .finally(() => setLoading(false));
-        console.log(selectedProject);
     };
 
     return (

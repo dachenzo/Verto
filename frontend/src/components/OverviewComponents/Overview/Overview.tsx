@@ -1,4 +1,5 @@
-import { Project } from "../../../customHooks/useProjects";
+import { Project } from "../../../customHooks/interfaces";
+import Spinner from "../../Spinner/Spinner";
 import OverviewFilters from "../OverviewFilters/OverviewFilters";
 import OverviewHeader from "../OverviewHeader/OverviewHeader";
 import ProjectCard from "../ProjectCard/ProjectCard";
@@ -6,14 +7,15 @@ import ProjectsGrid from "../ProjectsGrid/ProjectsGrid";
 import styles from "./Overview.module.css";
 
 interface Props {
-    data: Project[] | undefined;
+    data: Project[] | null;
+    loading: boolean;
 }
-const Overview = ({ data }: Props) => {
+const Overview = ({ data, loading }: Props) => {
     return (
         <div className={styles.mainContent}>
             <OverviewHeader></OverviewHeader>
             <OverviewFilters></OverviewFilters>
-
+            {loading ? <Spinner height={""} width={""}></Spinner> : ""}
             <ProjectsGrid>
                 {data?.map((project) => (
                     <ProjectCard

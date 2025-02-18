@@ -1,4 +1,4 @@
-import { useSelectedProject } from "../../../contexts/ProjectContext";
+import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import styles from "./ProjectCardContainer.module.css";
 
 interface Props {

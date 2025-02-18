@@ -1,4 +1,4 @@
-import { useSelectedProject } from "../../../contexts/ProjectContext";
+import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import ProjectDetailMilestone from "../ProjectDetailMilestone/ProjectDetailMilestone";
 import styles from "./ProjectDetailMilestoneList.module.css";
 

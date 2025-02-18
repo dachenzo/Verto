@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelectedProject } from "../../../contexts/ProjectContext";
+import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import NavMilestone from "../NavMilestoneItem/NavMilestone";
 import styles from "./NavMilestoneList.module.css";
 import { useNavigate } from "react-router-dom";

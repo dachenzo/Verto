@@ -1,4 +1,4 @@
-import { useSelectedProject } from "../../../contexts/ProjectContext";
+import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import ProgressBar from "../../ProgressBar/ProgressBar";
 import styles from "./ProjectDetailCardHeader.module.css";
 

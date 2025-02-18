@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useSelectedProject } from "../../../contexts/ProjectContext";
+import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import MilestoneTaskItem from "../MilestoneTaskItem/MilestoneTaskItem";
 import styles from "./MilestoneTaskList.module.css";
 

@@ -1,0 +1,61 @@
+.editButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
+.editButton:hover {
+    background-color: #1976d2;
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+    transform: translateY(-1px);
+}
+
+.editButton:active {
+    background-color: #1565c0;
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+    transform: translateY(0);
+}
+
+.editButton svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Optional ripple effect */
+.editButton {
+    position: relative;
+    overflow: hidden;
+}
+
+.editButton::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease-out, height 0.3s ease-out;
+}
+
+.editButton:active::after {
+    width: 200%;
+    height: 200%;
+}

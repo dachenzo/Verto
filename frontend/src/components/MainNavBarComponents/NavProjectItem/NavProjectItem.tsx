@@ -1,4 +1,4 @@
-import { Project } from "../../../customHooks/useProjects";
+import { Project } from "../../../customHooks/interfaces";
 import styles from "./NavProjectItem.module.css";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { useSelectedProject } from "../../../contexts/ProjectContext";
+import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
 import styles from "./ProjectNavHeader.module.css";
 
 const ProjectNavHeader = () => {

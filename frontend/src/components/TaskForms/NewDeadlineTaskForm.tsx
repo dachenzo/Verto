@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import styles from "./TaskForms.module.css";
 import { useParams } from "react-router-dom";
 import useFormsSubmit from "../../customHooks/useFormSubmit";
-import { useSelectedProject } from "../../contexts/ProjectContext";
+import { useSelectedProject } from "../../contexts/SelectedProjectContext";
 
 interface DeadlineTaskData {
     title: string;
@@ -24,9 +24,9 @@ const NewDeadlineTaskForm = ({ setIsNewTaskForm }: Props) => {
         handleSubmit,
         formState: { errors },
     } = useForm<DeadlineTaskData>();
-    const Formsubmit = (data: DeadlineTaskData) => {
+    const Formsubmit = async (data: DeadlineTaskData) => {
         const completeData = { milestoneId, ...data, type: "DEADLINE" };
-        submit(completeData);
+        await submit(completeData);
         if (projectId !== undefined) {
             loadProjectDetails(parseInt(projectId));
         }

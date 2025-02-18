@@ -8,14 +8,15 @@ const useFormsSubmit = <T>(url: string) => {
     const submit = async (data: T) => {
         setLoading(true);
         setError(null);
-        await apiClient
-            .post<T>(url, data)
-            .then(() => {})
-            .catch((err) => {
-                setError(err.message);
-                console.log(err.message);
-            })
-            .finally(() => setLoading(false));
+        try {
+            const response = await apiClient.post<T>(url, data);
+            return response.data;
+        } catch (err: any) {
+            setError(err.message);
+            console.log(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return { loading, error, submit };

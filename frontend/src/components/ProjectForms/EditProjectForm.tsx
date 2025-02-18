@@ -2,9 +2,9 @@ import styles from "./ProjectForms.module.css";
 import sharedStyles from "../OverviewComponents/sharedStyles.module.css";
 import Overlay from "../TaskForms/Overlay/Overlay";
 import { useForm } from "react-hook-form";
-import useFormsSubmit from "../../customHooks/useFormSubmit";
 import Spinner from "../Spinner/Spinner";
-import { useProjects } from "../../contexts/ProjectsContext";
+import { useSelectedProject } from "../../contexts/SelectedProjectContext";
+import useFormUpdate from "../../customHooks/useFormUpdate";
 
 interface Props {
     closeModal: () => void;
@@ -20,31 +20,38 @@ interface ProjectFormData {
     dueDate: Date;
 }
 
-const NewProjectForm = ({ closeModal }: Props) => {
-    const { loading, submit } = useFormsSubmit<ProjectFormData>("/project/");
+const EditProjectForm = ({ closeModal }: Props) => {
+    const { selectedProject, loadProjectDetails, loading } =
+        useSelectedProject();
+    const { error, updateLoading, submit } = useFormUpdate<ProjectFormData>(
+        `/project/${selectedProject?.projectId}`
+    );
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<ProjectFormData>();
+    } = useForm<ProjectFormData>({
+        defaultValues: {
+            title: selectedProject?.title,
+            description: selectedProject?.description,
+            priority: selectedProject?.priority,
+        },
+    });
 
-    const { loadAllProjects } = useProjects();
-    const formSubmit = async (data?: any) => {
-        const newProject = await submit(data);
-        console.log(newProject);
-        await loadAllProjects();
+    const help = async (data: any) => {
+        await submit(data);
+        if (selectedProject?.projectId)
+            await loadProjectDetails(selectedProject?.projectId);
         closeModal();
     };
 
     return (
-        <Overlay title={"Create New Project"}>
-            {loading ? (
+        <Overlay title={"Edit Project"}>
+            {updateLoading || loading ? (
                 <Spinner height={"500px"} width={"100px"}></Spinner>
             ) : (
-                <form
-                    className={styles.formCard}
-                    onSubmit={handleSubmit(formSubmit)}
-                >
+                <form className={styles.formCard} onSubmit={handleSubmit(help)}>
+                    {error && <p className={styles.e}>{error}</p>}
                     <div className={styles.formSection}>
                         <div className={styles.formGroup}>
                             <label className={styles.formLabel}>
@@ -94,6 +101,13 @@ const NewProjectForm = ({ closeModal }: Props) => {
                             <input
                                 type="date"
                                 className={styles.formInput}
+                                defaultValue={
+                                    selectedProject?.dueDate
+                                        ? new Date(selectedProject.dueDate)
+                                              .toISOString()
+                                              .split("T")[0]
+                                        : ""
+                                }
                                 {...register("dueDate", {
                                     required: "due date is required",
                                     validate: {
@@ -153,7 +167,7 @@ const NewProjectForm = ({ closeModal }: Props) => {
                                 <polyline points="17 21 17 13 7 13 7 21"></polyline>
                                 <polyline points="7 3 7 8 15 8"></polyline>
                             </svg>
-                            Create Project
+                            Update Project
                         </button>
                     </div>
                 </form>
@@ -162,4 +176,4 @@ const NewProjectForm = ({ closeModal }: Props) => {
     );
 };
 
-export default NewProjectForm;
+export default EditProjectForm;
