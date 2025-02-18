@@ -20,6 +20,9 @@ export class UpdateMilestoneDto {
     @IsFutureDate({ message: 'End time has to be a future date' })
     dueDate: Date;
 
+    @IsOptional()
+    orderIndex: number;
+
     @IsNotEmpty()
     projectId: number;
 

@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Project } from './project.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
 import { ProjectRole, ProjectUser } from './projectuser.entity';
 import { CreateProjectDto } from './dtos/create-project-dto';
@@ -18,6 +18,7 @@ export class ProjectService {
         @InjectRepository(ProjectUser)
         private projectUserRepo: Repository<ProjectUser>,
         private userService: UserService,
+        private readonly dataSource: DataSource,
     ) {}
 
     async createProject(project: CreateProjectDto) {
@@ -122,31 +123,47 @@ export class ProjectService {
     }
 
     async deleteProject(projectId: number, userId: number) {
-        const project = await this.projectRepo.findOne({
-            where: { projectId },
-            relations: ['projectUsers', 'projectUsers.user'],
-        });
+        const queryRunner = this.dataSource.createQueryRunner();
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
 
-        if (!project) {
-            throw new NotFoundException('Project not found');
-        }
+        try {
+            // Fetch project within the transaction
+            const project = await queryRunner.manager.findOne(Project, {
+                where: { projectId },
+                relations: ['projectUsers', 'projectUsers.user'],
+            });
 
-        const projectUser = project.projectUsers.find(
-            (pu) => pu.user.userId === userId,
-        );
+            if (!project) {
+                throw new NotFoundException('Project not found');
+            }
 
-        if (!projectUser) {
-            throw new ForbiddenException(
-                'User is not a member of this Project',
+            const projectUser = project.projectUsers.find(
+                (pu) => pu.user.userId === userId,
             );
-        }
 
-        if (projectUser.role !== ProjectRole.OWNER) {
-            throw new ForbiddenException(
-                'Only the project owner can delete projects',
-            );
-        }
+            if (!projectUser) {
+                throw new ForbiddenException(
+                    'User is not a member of this Project',
+                );
+            }
 
-        await this.projectRepo.remove(project);
+            if (projectUser.role !== ProjectRole.OWNER) {
+                throw new ForbiddenException(
+                    'Only the project owner can delete projects',
+                );
+            }
+
+            // Remove project within the transaction
+            await queryRunner.manager.remove(Project, project);
+
+            // Commit transaction to ensure deletion is fully processed
+            await queryRunner.commitTransaction();
+        } catch (error) {
+            await queryRunner.rollbackTransaction(); // Rollback if any error occurs
+            throw error;
+        } finally {
+            await queryRunner.release(); // Always release the query runner
+        }
     }
 }

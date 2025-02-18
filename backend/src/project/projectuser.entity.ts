@@ -21,11 +21,15 @@ export class ProjectUser {
 
     @ManyToOne(() => Project, (project) => project.projectUsers, {
         nullable: false,
+        onDelete: 'CASCADE',
     })
     @JoinColumn({ name: 'projectId' })
     project: Project;
 
-    @ManyToOne(() => User, (user) => user.projectUsers, { nullable: false })
+    @ManyToOne(() => User, (user) => user.projectUsers, {
+        nullable: false,
+        onDelete: 'CASCADE',
+    })
     @JoinColumn({ name: 'userId' })
     user: User;
 

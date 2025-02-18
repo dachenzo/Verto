@@ -22,8 +22,8 @@ export class ProjectController {
     constructor(private projectService: ProjectService) {}
 
     @Get()
-    getAllProjects(@Body() body: { userId: number }) {
-        return this.projectService.getAllProjects(body);
+    async getAllProjects(@Body() body: { userId: number }) {
+        return await this.projectService.getAllProjects(body);
     }
 
     @Get('/:id')
@@ -40,23 +40,25 @@ export class ProjectController {
     }
 
     @Post()
-    creteProject(@Body() body: CreateProjectDto) {
-        this.projectService.createProject(body);
+    async creteProject(@Body() body: CreateProjectDto) {
+        return await this.projectService.createProject(body);
     }
 
     @Patch('/:id')
-    updateProject(
+    async updateProject(
         @Body() body: UpdateProjectDto,
         @Param('id') projectId: number,
     ) {
-        this.projectService.updateProject(body, projectId);
+        await this.projectService.updateProject(body, projectId);
+        return;
     }
 
     @Delete('/:id')
-    deleteProject(
+    async deleteProject(
         @Param('id') projectId: number,
         @Body() body: { userId: number },
     ) {
-        this.projectService.deleteProject(projectId, body.userId);
+        await this.projectService.deleteProject(projectId, body.userId);
+        return;
     }
 }
