@@ -97,7 +97,7 @@ export class MilestoneService {
         const { userId, ...milestoneDetails } = milestone;
         Object.assign(oldMilestone, milestoneDetails);
 
-        const updatedMilestone = this.milestoneRepo.save(oldMilestone);
+        const updatedMilestone = await this.milestoneRepo.save(oldMilestone);
         return updatedMilestone;
     }
 

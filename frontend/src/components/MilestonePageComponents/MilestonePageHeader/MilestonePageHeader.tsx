@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
-import ProgressBar from "../../ProgressBar/ProgressBar";
+import ProgressBar, { progressCalculator } from "../../ProgressBar/ProgressBar";
 import styles from "./MilestonePageHeader.module.css";
 import EditMilestoneBtn from "../EditMilestoneBtn/EditMilestoneBtn";
 import DeleteBtn from "../../DeleteBtn/DeleteBtn";
@@ -21,6 +21,8 @@ const MilestonePageHeader = () => {
                   (pu) => pu.milestoneId === parseInt(milestoneId)
               )
             : undefined;
+
+    const percent = progressCalculator(milestone?.tasks);
     return (
         <div className={styles.milestoneHeader}>
             <div className={styles.placeholder}>
@@ -36,7 +38,7 @@ const MilestonePageHeader = () => {
                     ></DeleteBtn>
                 </div>
             </div>
-            <ProgressBar></ProgressBar>
+            <ProgressBar percent={percent}></ProgressBar>
             <div className={styles.milestoneMeta}>
                 <div className={styles.metaItem}>
                     <svg

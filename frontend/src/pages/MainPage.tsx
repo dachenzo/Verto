@@ -1,10 +1,10 @@
 import MainNavBar from "../components/MainNavBarComponents/MainNavBar/MainNavBar";
 import Overview from "../components/OverviewComponents/Overview/Overview";
 import ScreenBody from "../components/ScreenBody/ScreenBody";
-import { useProjects } from "../contexts/ProjectsContext";
+import { useProjectsContext } from "../contexts/ProjectsContext";
 
 const MainPage = () => {
-    const { projects, loading } = useProjects();
+    const { projects, loading } = useProjectsContext();
 
     return (
         <ScreenBody>

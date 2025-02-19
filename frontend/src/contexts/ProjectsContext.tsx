@@ -28,7 +28,7 @@ export const ProjectsProvider = ({
 
         try {
             const response = await apiClient.get<Project[]>("/project/");
-            console.log(response.data);
+
             setProjects([...response.data]); // Ensure a new reference
         } catch (err: any) {
             console.log(err);
@@ -56,7 +56,7 @@ export const ProjectsProvider = ({
     );
 };
 
-export const useProjects = (): ProjectsContextType => {
+export const useProjectsContext = (): ProjectsContextType => {
     const context = useContext(ProjectsContext);
     if (!context) {
         throw new Error(

@@ -24,6 +24,7 @@ const Overview = ({ data, loading }: Props) => {
                         completed={project.completed}
                         dueDate={project.dueDate}
                         key={project.projectId}
+                        milestones={project.milestones}
                     ></ProjectCard>
                 ))}
             </ProjectsGrid>

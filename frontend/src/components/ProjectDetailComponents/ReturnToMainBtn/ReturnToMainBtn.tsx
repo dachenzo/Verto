@@ -1,13 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./ReturntoMainBtn.module.css";
+import { useProjectsContext } from "../../../contexts/ProjectsContext";
 
 const ReturnToMainBtn = () => {
     const navigation = useNavigate();
+    const { loadAllProjects } = useProjectsContext();
     return (
         <a
             href="#"
             className={styles.backBtn}
-            onClick={() => navigation("/main")}
+            onClick={async () => {
+                await loadAllProjects();
+                navigation("/main");
+            }}
         >
             <svg
                 width="20"

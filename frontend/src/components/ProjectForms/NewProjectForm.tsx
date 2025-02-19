@@ -4,7 +4,7 @@ import Overlay from "../TaskForms/Overlay/Overlay";
 import { useForm } from "react-hook-form";
 import useFormsSubmit from "../../customHooks/useFormSubmit";
 import Spinner from "../Spinner/Spinner";
-import { useProjects } from "../../contexts/ProjectsContext";
+import { useProjectsContext } from "../../contexts/ProjectsContext";
 
 interface Props {
     closeModal: () => void;
@@ -28,7 +28,7 @@ const NewProjectForm = ({ closeModal }: Props) => {
         formState: { errors },
     } = useForm<ProjectFormData>();
 
-    const { loadAllProjects } = useProjects();
+    const { loadAllProjects } = useProjectsContext();
     const formSubmit = async (data?: any) => {
         const newProject = await submit(data);
         console.log(newProject);

@@ -87,6 +87,7 @@ export class ProjectService {
 
         const projects = await this.projectRepo
             .createQueryBuilder('project')
+            .innerJoinAndSelect('project.milestones', 'milestones')
             .innerJoin('project.projectUsers', 'pu')
             .where('pu.userId = :userId', { userId: user.userId })
             .getMany();

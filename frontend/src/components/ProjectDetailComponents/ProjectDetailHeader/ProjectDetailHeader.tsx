@@ -4,12 +4,12 @@ import NewMilestoneBtn from "../NewMilestoneBtn/NewMilestoneBtn";
 import EditProjectBtn from "../EditProjectBtn/EditProjectBtn";
 import DeleteBtn from "../../DeleteBtn/DeleteBtn";
 import { useSelectedProject } from "../../../contexts/SelectedProjectContext";
-import { useProjects } from "../../../contexts/ProjectsContext";
+import { useProjectsContext } from "../../../contexts/ProjectsContext";
 import { useNavigate } from "react-router-dom";
 
 const ProjectDetailHeader = () => {
     const { selectedProject } = useSelectedProject();
-    const { loadAllProjects } = useProjects();
+    const { loadAllProjects } = useProjectsContext();
     const navigate = useNavigate();
     const onDeleteSuccess = async () => {
         await loadAllProjects();

@@ -37,16 +37,16 @@ export class MilestoneController {
     }
 
     @Post()
-    createMilestone(@Body() body: CreateMilestoneDto) {
-        return this.milestoneService.createMilestone(body);
+    async createMilestone(@Body() body: CreateMilestoneDto) {
+        return await this.milestoneService.createMilestone(body);
     }
 
     @Patch('/:id')
-    updateMilestone(
+    async updateMilestone(
         @Body() body: UpdateMilestoneDto,
         @Param('id') milestoneId: number,
     ) {
-        return this.milestoneService.updateMilestone(body, milestoneId);
+        return await this.milestoneService.updateMilestone(body, milestoneId);
     }
 
     @Delete('/:id')

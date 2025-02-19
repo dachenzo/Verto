@@ -40,7 +40,6 @@ export class TasksController {
 
     @Patch('/:id')
     async updateTask(@Body() body: UpdateTaskDto, @Param('id') taskId: number) {
-        console.log(body);
         return await this.taskService.updateTask(taskId, body);
     }
 
