@@ -1,6 +1,6 @@
-import { Project } from 'src/project/project.entity';
-import { ProjectUser } from 'src/project/projectuser.entity';
-import { Task } from 'src/tasks/task.entity';
+import { Invitation } from 'src/invitation/invitation.entity';
+import { ProjectUser } from 'src/project-user/projectUser.entity';
+
 import {
     Entity,
     Column,
@@ -30,4 +30,7 @@ export class User {
 
     @OneToMany(() => ProjectUser, (projectUser) => projectUser.project)
     projectUsers: ProjectUser[];
+
+    @OneToMany(() => Invitation, (invitation) => invitation.inviter)
+    invitations: Invitation[];
 }

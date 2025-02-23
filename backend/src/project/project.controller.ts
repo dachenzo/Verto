@@ -23,7 +23,10 @@ export class ProjectController {
 
     @Get()
     async getAllProjects(@Body() body: { userId: number }) {
-        return await this.projectService.getAllProjects(body);
+        const projects = await this.projectService.getAllProjects(body);
+        console.log(projects);
+
+        return projects;
     }
 
     @Get('/:id')

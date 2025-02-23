@@ -10,7 +10,7 @@ import { UpdateMilestoneDto } from './dtos/update-milestone-dto';
 import { CreateMilestoneDto } from './dtos/create-milestone-dto';
 import { UserService } from 'src/user/user.service';
 import { Project } from 'src/project/project.entity';
-import { ProjectRole } from 'src/project/projectuser.entity';
+import { ProjectRole } from 'src/project-user/projectUser.entity';
 
 //TODO: DONT FORGET TO WRAP THE ODERINGINDEX UPDATES IN TRANSACTIONS FOR CONSISTENCY
 @Injectable()

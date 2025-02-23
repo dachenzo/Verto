@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Project } from './project.entity';
 import { DataSource, Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
-import { ProjectRole, ProjectUser } from './projectuser.entity';
+import { ProjectRole, ProjectUser } from '../project-user/projectUser.entity';
 import { CreateProjectDto } from './dtos/create-project-dto';
 import { UpdateProjectDto } from './dtos/update-project-dto';
 
@@ -39,7 +39,12 @@ export class ProjectService {
             role: ProjectRole.OWNER,
         });
 
-        await this.projectUserRepo.save(projectUser);
+        try {
+            await this.projectUserRepo.save(projectUser);
+            console.log(savedProject);
+        } catch (error) {
+            console.log(error);
+        }
 
         return savedProject;
     }
@@ -84,10 +89,11 @@ export class ProjectService {
 
     async getAllProjects(userData: { userId: number }) {
         const user = await this.userService.getUserById(userData.userId);
+        console.log(user);
 
         const projects = await this.projectRepo
             .createQueryBuilder('project')
-            .innerJoinAndSelect('project.milestones', 'milestones')
+            .leftJoinAndSelect('project.milestones', 'milestone')
             .innerJoin('project.projectUsers', 'pu')
             .where('pu.userId = :userId', { userId: user.userId })
             .getMany();

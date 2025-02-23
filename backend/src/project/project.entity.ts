@@ -1,17 +1,15 @@
 import { Milestone } from 'src/milestone/milestone.entity';
 import { Task } from 'src/tasks/task.entity';
-import { User } from 'src/user/user.entity';
+
 import {
     Column,
     Entity,
-    JoinTable,
-    ManyToMany,
-    ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { ProjectUser } from './projectuser.entity';
+import { ProjectUser } from 'src/project-user/projectUser.entity';
+import { Invitation } from 'src/invitation/invitation.entity';
 
 @Entity()
 export class Project {
@@ -49,4 +47,7 @@ export class Project {
 
     @OneToMany(() => ProjectUser, (projectUser) => projectUser.project)
     projectUsers: ProjectUser[];
+
+    @OneToMany(() => Invitation, (invitation) => invitation.project)
+    invitations: Invitation[];
 }

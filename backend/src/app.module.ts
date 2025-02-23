@@ -12,6 +12,9 @@ import { User } from './user/user.entity';
 import { Task } from './tasks/task.entity';
 import { ProjectModule } from './project/project.module';
 import { MilestoneModule } from './milestone/milestone.module';
+import { ProjectUserModule } from './project-user/project-user.module';
+import { MailModule } from './mail/mail.module';
+import { InvitationModule } from './invitation/invitation.module';
 
 @Module({
     imports: [
@@ -34,6 +37,9 @@ import { MilestoneModule } from './milestone/milestone.module';
         AuthCoreModule,
         ProjectModule,
         MilestoneModule,
+        ProjectUserModule,
+        MailModule,
+        InvitationModule,
     ],
     controllers: [],
     providers: [

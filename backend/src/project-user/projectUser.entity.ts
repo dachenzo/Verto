@@ -5,7 +5,7 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Project } from './project.entity';
+import { Project } from 'src/project/project.entity';
 import { User } from 'src/user/user.entity';
 
 export enum ProjectRole {

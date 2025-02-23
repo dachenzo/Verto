@@ -10,7 +10,7 @@ import { CreateTaskDto } from './dtos/create-task-dto';
 
 import { UserService } from 'src/user/user.service';
 import { Milestone } from 'src/milestone/milestone.entity';
-import { ProjectRole } from 'src/project/projectuser.entity';
+import { ProjectRole } from 'src/project-user/projectUser.entity';
 import { UpdateTaskDto } from './dtos/update-task-dto';
 
 @Injectable()
