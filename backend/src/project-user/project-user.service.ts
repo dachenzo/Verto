@@ -27,5 +27,7 @@ export class ProjectUserService {
             project,
             role: projectUser.projectRole,
         });
+
+        await this.projectUserRepo.save(newProjectUser);
     }
 }

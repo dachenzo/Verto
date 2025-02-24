@@ -4,6 +4,7 @@ import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/user/user.entity';
 import { JwtRedisService } from 'src/redis/jwt-redis.service';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -87,5 +88,30 @@ export class AuthService {
         );
 
         return this.login(user.userId, user.email, user);
+    }
+
+    async isLoggedIn(request: Request) {
+        const extractTokenFromCookie = (request: Request) => {
+            const accessToken = request.cookies.accessToken;
+            // console.log(`accessToken: ${accessToken}`);
+            return accessToken;
+        };
+
+        const token = extractTokenFromCookie(request);
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            const payload = this.jwtservice.verify(token, {
+                secret: process.env.JWT_SECRET_KEY,
+            });
+
+            request.body.userId = payload.sub;
+            return true;
+        } catch (err) {
+            return false;
+        }
     }
 }

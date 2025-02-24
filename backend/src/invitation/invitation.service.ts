@@ -1,30 +1,79 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    ForbiddenException,
+    Injectable,
+    NotFoundException,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MailService } from 'src/mail/mail.service';
-import { ProjectUser } from 'src/project-user/projectUser.entity';
+import { ProjectRole, ProjectUser } from 'src/project-user/projectUser.entity';
 import { Repository } from 'typeorm';
 import { Invitation } from './invitation.entity';
 import { UserService } from 'src/user/user.service';
 import { ProjectUserService } from 'src/project-user/project-user.service';
+import { SendInvitationDto } from './dtos/send-invitation-dto';
+import { Project } from 'src/project/project.entity';
 
 @Injectable()
 export class InvitationService {
     constructor(
         private mailService: MailService,
         @InjectRepository(Invitation)
-        private InvitationRepo: Repository<Invitation>,
+        private invitationRepo: Repository<Invitation>,
+        @InjectRepository(Project)
+        private projectRepo: Repository<Project>,
         private projectUserService: ProjectUserService,
         private userService: UserService,
     ) {}
 
+    async createAndSendInvitation(invitation: SendInvitationDto) {
+        const project = await this.projectRepo.findOne({
+            where: { projectId: invitation.projectId },
+            relations: ['projectUsers', 'projectUsers.user'],
+        });
+
+        if (!project) {
+            throw new NotFoundException('Project not found');
+        }
+
+        const projectUser = project.projectUsers.find(
+            (pu) => pu.user.userId === invitation.userId,
+        );
+
+        if (!projectUser) {
+            throw new ForbiddenException('User not part of this project');
+        }
+
+        if (projectUser.role === ProjectRole.COLLABORATOR) {
+            throw new UnauthorizedException(
+                'Coolaborators cannot invite new Users',
+            );
+        }
+
+        const newInvitation = this.invitationRepo.create({
+            senderEmail: projectUser.user.email,
+            project,
+            inviteeRole: invitation.role,
+            inviter: projectUser.user,
+        });
+
+        await this.invitationRepo.save(newInvitation);
+        await this.sendInvitationMail(
+            project.title,
+            projectUser.user.username,
+            invitation.inviteeEmail,
+            newInvitation.token,
+        );
+    }
+
     async sendInvitationMail(
         projectName: string,
         from: string,
-        email: string,
+        to: string,
         token: string,
     ) {
-        const acceptUrl = `http://localhost:3000/invitation/accept?${token}`;
-        const rejectUrl = `http://localhost:3000/invitation/reject?${token}`;
+        const acceptUrl = `http://localhost:3000/invitation/accept?invitationToken=${token}`;
+        const rejectUrl = `http://localhost:3000/invitation/reject?invitationToken=${token}`;
 
         const html = `<html>
                         <head>
@@ -45,14 +94,14 @@ export class InvitationService {
                         </body>
                         </html>`;
         await this.mailService.sendMailTo(
-            email,
+            to,
             'Youre Being Invited to join our Project',
             html,
         );
     }
 
     async acceptInvitation(invitationToken: string, userId: number) {
-        const invitation = await this.InvitationRepo.findOne({
+        const invitation = await this.invitationRepo.findOne({
             where: { token: invitationToken },
             relations: ['project', 'user'],
         });
@@ -62,9 +111,9 @@ export class InvitationService {
         }
 
         invitation.status = 'ACCEPTED';
-        await this.InvitationRepo.save(invitation);
+        await this.invitationRepo.save(invitation);
 
-        await this.projectUserService.createProjectUser({
+        const newProjectUser = await this.projectUserService.createProjectUser({
             projectId: invitation.project.projectId,
             userId: invitation.inviter.userId,
             projectRole: invitation.inviteeRole,
@@ -72,7 +121,7 @@ export class InvitationService {
     }
 
     async rejectInvitation(invitationToken: string) {
-        const invitation = await this.InvitationRepo.findOne({
+        const invitation = await this.invitationRepo.findOne({
             where: { token: invitationToken },
         });
 
@@ -81,6 +130,6 @@ export class InvitationService {
         }
 
         invitation.status = 'REJECTED';
-        await this.InvitationRepo.save(invitation);
+        await this.invitationRepo.save(invitation);
     }
 }

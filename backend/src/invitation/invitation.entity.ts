@@ -22,7 +22,7 @@ export class Invitation {
     @ManyToOne(() => Project, (project) => project.invitations)
     project: Project;
 
-    @Column({ type: 'enum' })
+    @Column()
     inviteeRole: ProjectRole;
 
     @ManyToOne(() => User, (user) => user.invitations)

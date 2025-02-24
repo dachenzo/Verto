@@ -3,6 +3,7 @@ import {
     Controller,
     Get,
     Post,
+    Query,
     Req,
     Res,
     UnauthorizedException,
@@ -15,6 +16,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { Public } from './decorators/public.decorator';
 import { Response } from 'express';
+import { Invitation } from 'src/invitation/invitation.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -51,6 +53,7 @@ export class AuthController {
     async login(
         @Res({ passthrough: true }) response: Response,
         @Body() body: UserLoginDto,
+        @Query('invitationToken') invitationToken: string,
     ) {
         const user = await this.authService.validateUser(
             body.email,
@@ -76,6 +79,12 @@ export class AuthController {
             sameSite: 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
+
+        if (invitationToken) {
+            return response.redirect(
+                `invitation/accept?invitationToken=${invitationToken}`,
+            );
+        }
 
         return { message: 'Login_successfully' };
     }

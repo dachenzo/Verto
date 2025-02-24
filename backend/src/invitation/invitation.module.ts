@@ -6,15 +6,22 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Invitation } from './invitation.entity';
 import { ProjectUser } from 'src/project-user/projectUser.entity';
 import { UserModule } from 'src/user/user.module';
+import { Project } from 'src/project/project.entity';
+import { ProjectModule } from 'src/project/project.module';
+import { ProjectUserModule } from 'src/project-user/project-user.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
     controllers: [InvitationController],
     providers: [InvitationService],
     imports: [
         MailModule,
-        TypeOrmModule.forFeature([Invitation, ProjectUser]),
+        ProjectModule,
+        ProjectUserModule,
+        TypeOrmModule.forFeature([Invitation, ProjectUser, Project]),
         UserModule,
-        ProjectUser,
+
+        AuthModule,
     ],
 })
 export class InvitationModule {}

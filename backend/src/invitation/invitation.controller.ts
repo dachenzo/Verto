@@ -8,83 +8,59 @@ import {
     Query,
     Req,
     Res,
+    UseInterceptors,
 } from '@nestjs/common';
 import { InvitationService } from './invitation.service';
+import { SendInvitationDto } from './dtos/send-invitation-dto';
+import { InsertUserInterceptor } from 'src/interceptors/insert-userid.interceptor';
+import { Public } from 'src/auth/decorators/public.decorator';
+import { AuthService } from 'src/auth/auth.service';
+import { Request, Response } from 'express';
 
 @Controller('invitation')
+@UseInterceptors(InsertUserInterceptor)
 export class InvitationController {
-    constructor(private readonly invitationService: InvitationService) {}
+    constructor(
+        private readonly invitationService: InvitationService,
+        private authService: AuthService,
+    ) {}
 
     @Post('send')
-    async sendInvitation(
-        @Body() sendInvitationDto: SendInvitationDto,
-        @Req() req: Request,
-    ) {
-        // Assuming the inviter is the authenticated user
-        const inviter = req.user; // Make sure your auth guard populates this
-        if (!inviter) {
-            throw new HttpException(
-                'Not authenticated',
-                HttpStatus.UNAUTHORIZED,
-            );
-        }
-        await this.invitationService.sendInvitation(
-            sendInvitationDto.inviteeEmail,
-            sendInvitationDto.projectId,
-            inviter,
-        );
+    async sendInvitation(@Body() sendInvitationDto: SendInvitationDto) {
+        await this.invitationService.createAndSendInvitation(sendInvitationDto);
         return { message: 'Invitation sent successfully' };
     }
 
     // --- Accept Invitation Endpoint ---
+    @Public()
     @Get('accept')
     async acceptInvitation(
-        @Query('token') token: string,
-        @Query('projectId') projectId: string,
+        @Query('invitationToken') token: string,
         @Req() req: Request,
         @Res() res: Response,
     ) {
-        // Check if user is authenticated
-        if (!req.user) {
-            // Not logged in, so redirect to login, preserving the invitation data
-            return res.redirect(
-                `/login?inviteToken=${encodeURIComponent(
-                    token,
-                )}&projectId=${encodeURIComponent(projectId)}`,
-            );
+        if (!this.authService.isLoggedIn(req)) {
+            res.redirect(`http://localhost:5173?invitationToken=${token}`);
         }
 
-        // User is authenticated; process the invitation
-        try {
-            await this.invitationService.acceptInvitation(
-                token,
-                projectId,
-                req.user,
-            );
-            return res.redirect('/dashboard'); // Redirect after success
-        } catch (error) {
-            throw new HttpException(
-                'Invalid or expired invitation',
-                HttpStatus.BAD_REQUEST,
-            );
-        }
+        this.invitationService.acceptInvitation(token, req.body.userId);
     }
 
-    // --- Reject Invitation Endpoint ---
-    @Get('reject')
-    async rejectInvitation(
-        @Query('token') token: string,
-        @Query('projectId') projectId: string,
-        @Res() res: Response,
-    ) {
-        try {
-            await this.invitationService.rejectInvitation(token, projectId);
-            return res.redirect('/feedback'); // Redirect to a feedback or info page
-        } catch (error) {
-            throw new HttpException(
-                'Invalid or expired invitation',
-                HttpStatus.BAD_REQUEST,
-            );
-        }
-    }
+    // // --- Reject Invitation Endpoint ---
+    // @Get('reject')
+    // async rejectInvitation(
+    //     @Query('token') token: string,
+    //     @Query('projectId') projectId: string,
+    //     @Res() res: Response,
+    // ) {
+    //     try {
+    //         await this.invitationService.rejectInvitation(token, projectId);
+    //         return res.redirect('/feedback'); // Redirect to a feedback or info page
+    //     } catch (error) {
+    //         throw new HttpException(
+    //             'Invalid or expired invitation',
+    //             HttpStatus.BAD_REQUEST,
+    //         );
+    //     }
+    // }
 }
