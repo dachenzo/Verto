@@ -8,6 +8,7 @@ import MilestonePage from "./components/MilestonePageComponents/MilestonePage/Mi
 import useAuthRefresh from "./customHooks/useAuthRefresh";
 import { SelectedProjectProvider } from "./contexts/SelectedProjectContext";
 import { ProjectsProvider } from "./contexts/ProjectsContext";
+import ActivityLog from "./components/UserMangementComponents/ActivityLog/ActivityLog";
 
 function App() {
     useAuthRefresh();
@@ -23,6 +24,10 @@ function App() {
                             element={<ProjectPage />}
                         >
                             <Route path="" element={<ProjectDetail />}></Route>
+                            <Route
+                                path="users"
+                                element={<ActivityLog />}
+                            ></Route>
                             <Route
                                 path="milestone/:milestoneId"
                                 element={<MilestonePage />}
